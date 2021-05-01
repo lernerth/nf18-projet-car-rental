@@ -32,8 +32,7 @@ CREATE TABLE SocieteEntretien(
 CREATE TABLE AssocAgenceSocieteEntretien(
   id_agence INTEGER REFERENCES Agence(id_agence),
   siret VARCHAR(14) REFERENCES SocieteEntretien(siret),
-  PRIMARY KEY(id_agence, siret),
-  CONSTRAINT check_siret CHECK(siret SIMILAR TO '[0-9]{14}')
+  PRIMARY KEY(id_agence, siret)
 );
 
 CREATE TABLE Entretien(
