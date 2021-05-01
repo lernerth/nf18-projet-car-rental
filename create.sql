@@ -87,7 +87,7 @@ CREATE TABLE Vehicule(
 );
 
 CREATE TABLE Location(
-  id_contrat INTEGER PRIMARY KEY,
+  id_contrat SERIAL INTEGER PRIMARY KEY,
   date_debut DATE NOT NULL,
   date_fin DATE,
   km_parcourus DECIMAL NOT NULL,
