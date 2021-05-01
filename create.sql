@@ -71,7 +71,7 @@ CREATE TABLE Modele(
   PRIMARY KEY (nom, marque, categorie)
 );
 
-CREATE TABLE vehicule(
+CREATE TABLE Vehicule(
   immat VARCHAR(7) UNIQUE,
   modele VARCHAR,
   carburant VARCHAR NOT NULL,
