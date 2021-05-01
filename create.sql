@@ -57,7 +57,7 @@ CREATE TABLE Marque(
   nom VARCHAR PRIMARY KEY
 );
 
-CREATE TYPE NomCategorie AS ENUM('Citadine', 'berline petite', 'berline moyenne', 'berline grande', '4X4 SUV', 'Pickup', 'utilitaire');
+CREATE TYPE NomCategorie AS ENUM('Citadine', 'Berline', 'berline petite', 'berline moyenne', 'berline grande', '4X4 SUV', 'Pickup', 'utilitaire');
 
 CREATE TABLE CategorieVehicule(
   nom NomCategorie PRIMARY KEY,
