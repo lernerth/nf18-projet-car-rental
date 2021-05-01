@@ -6,7 +6,8 @@ CREATE TABLE Agence(
   mail VARCHAR,
   telephone VARCHAR(10),
   CONSTRAINT check_mel CHECK(mail SIMILAR TO '([a-zA-Z0-9]+)@([a-zA-Z0-9]+).([a-zA-Z0-9]+)'),
-  CONSTRAINT check_tel CHECK(telephone SIMILAR TO '[0-9]{10}')
+  CONSTRAINT check_tel CHECK(telephone SIMILAR TO '[0-9]{10}'),
+  CONSTRAINT check_siret CHECK(siret SIMILAR TO '[0-9]{14}')
 );
 
 CREATE TABLE Employe(
@@ -26,7 +27,8 @@ CREATE TABLE AgentCommercial(
 
 CREATE TABLE SocieteEntretien(
   siret VARCHAR(14) PRIMARY KEY,
-  nom VARCHAR
+  nom VARCHAR,
+  CONSTRAINT check_siret CHECK(siret SIMILAR TO '[0-9]{14}')
 );
 
 CREATE TABLE AssocAgenceSocieteEntretien(
