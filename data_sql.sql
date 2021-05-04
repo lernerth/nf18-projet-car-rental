@@ -77,17 +77,16 @@ INSERT INTO LocationParticulier(id_contrat, particulier ) VALUES
 (1,1),
 (2,3);
 
-INSERT INTO Entreprise(nom,num_bancaire,mail,tel,siret)
-VALUES 
-('Nike','1234 1111 2222 3333','nike@gmail.com','0646734566','111 222 941'),
+INSERT INTO Entreprise(nom,num_bancaire,mail,tel,siret) VALUES 
 
-('Zumbacafew','2223 1333 5677 8444','zbc.jul@gmail.com','0744532458','335 232 566'),
+('Nike','1234111122223333','nike@gmail.com','0646734566','11122294112344'),
 
-('Popelop','2236 6544 6755 3332','popelop@wanadoo.fr','0623443355','666 655 455'),
+('Zumbacafew','2223133356778444','zbc.jul@gmail.com','0744532458','33523256623454'),
 
-('Tchikita','4466 4432 7766 4344','tchiki.tchiki@orange.fr','0677665454','334 555 665'),
+('Popelop','2236654467553332','popelop@wanadoo.fr','0623443355','66665545544567'),
 
-('Machine de A','5544 6444 3323 4444','quedescracks@gmail.com','0788665644','003 222 333');
+('Tchikita','4466443277664344','tchiki.tchiki@orange.fr','0677665454','33455566547654'),
+('Machine de A','5544644433234444','quedescracks@gmail.com','0788665644','00322274431467');
 
 INSERT INTO Conducteur(num_permis, nom, prenom, date_naissance, entreprise) VALUES 
 	('182640728375', 'Dubois', 'Paul', 19/10/1970, 'Nike'),
