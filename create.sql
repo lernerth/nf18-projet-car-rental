@@ -114,7 +114,7 @@ CREATE TABLE Particulier(
   date_naissance DATE NOT NULL,
   CONSTRAINT check_age check(AGE(date_naissance) >= INTERVAL '21 years'),
   CONSTRAINT check_tel CHECK(telephone SIMILAR TO '[0-9]{10}'),
-  CONSTRAINT check_mail CHECK(mail SIMILAR TO '([a-zA-Z0-9]+)@([a-zA-Z0-9]+).([a-zA-Z0-9]+)'),
+  CONSTRAINT check_mail CHECK(mail SIMILAR TO '([a-zA-Z0-9.]+)@([a-zA-Z0-9]+).([a-zA-Z0-9]+)'),
   CONSTRAINT check_num_permis CHECK(num_permis SIMILAR TO '[0-9A-Z]{9}'),
   CONSTRAINT num_bancaire CHECK(num_bancaire SIMILAR TO '[0-9]{16}')
 );
@@ -135,7 +135,7 @@ CREATE TABLE Entreprise(
   adresse VARCHAR,
   siret VARCHAR(14) NOT NULL,
   CONSTRAINT check_tel CHECK(tel SIMILAR TO '[0-9]{10}'),
-  CONSTRAINT check_mail CHECK(mail SIMILAR TO '([a-zA-Z0-9]+)@([a-zA-Z0-9]+).([a-zA-Z0-9]+)'),
+  CONSTRAINT check_mail CHECK(mail SIMILAR TO '([a-zA-Z0-9.]+)@([a-zA-Z0-9]+).([a-zA-Z0-9]+)'),
   CONSTRAINT num_bancaire CHECK(num_bancaire SIMILAR TO '[0-9]{16}'),
   CONSTRAINT check_siret CHECK(siret SIMILAR TO '[0-9]{14}')
 );
