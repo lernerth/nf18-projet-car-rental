@@ -72,8 +72,18 @@ INSERT INTO Location(date_debut ,date_fin,km_parcourus,vehicule_immat,entretien 
 INSERT INTO Particulier(nom,prenom,num_bancaire,mail ,telephone, adresse ,num_permis, date_naissance) VALUES
 ('Albert','Pinot', '0000 1111 2222 3333', 'albertpinot@gmail.com', '0695605788','20AW24096', '07/07/1998'),
 ('Charles','Renard', '1111 2222 0000 3333', 'charlesrenard@live.fr', '0678607898','19AW24696', '03/07/2000');
-LocationParticulier
-Entreprise
+LocationParticulier()
+INSERT INTO Entreprise(nom,num_bancaire,mail,tel,siret)
+VALUES 
+('Nike','1234 1111 2222 3333','nike@gmail.com','0646734566','111 222 941'),
+
+('Zumbacafew','2223 1333 5677 8444','zbc.jul@gmail.com','0744532458','335 232 566'),
+
+('Popelop','2236 6544 6755 3332','popelop@wanadoo.fr','0623443355','666 655 455'),
+
+('Tchikita','4466 4432 7766 4344','tchiki.tchiki@orange.fr','0677665454','334 555 665'),
+
+('Machine de A','5544 6444 3323 4444','quedescracks@gmail.com','0788665644','003 222 333');
 Conducteur
 LocationProfessionnel
 Facturation
