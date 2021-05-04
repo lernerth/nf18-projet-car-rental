@@ -16,18 +16,64 @@ cas 2: c'est une entreprise (facturation doit renvoyer vers id d'entreprise)
 		--> on lui demande le conducteur
 		--> si le conducteur n'existe pas dans la bdd, on le crée
 		--> on crée la location avec la clé étrangère facturation qui renvoie vers cette facturation 
-		--> on crée la locationProfessionnel avec une idContrat renvoyant vers la location nouvellement créée et conducteur qui renvoie vers le conducteur(num_permis)
+		--> on crée la locationProfessionnel avec une idContrat renvoyant vers la location nouvellement créée et 				conducteur qui renvoie vers le conducteur(num_permis)
 	cas 2.1.2: l'utilisateur répond non
 		--> on lui demande le conducteur
 		--> si le conducteur n'existe pas dans la bdd, on le crée
-		--> on crée une nouvelle facturation avec un idFacturation incrémenté et la clé clientProfessionnel qui renvoie vers l'idclient de cette entreprise
+		--> on crée une nouvelle facturation avec un idFacturation incrémenté et la clé clientProfessionnel qui renvoie 		vers l'idclient de cette entreprise
 		--> on crée la location avec la clé étrangère facturation qui renvoie vers cette facturation	
-		--> on crée la locationProfessionnel avec une idContrat renvoyant vers la location nouvellement créée et conducteur qui renvoie vers le conducteur(num_permis)
+		--> on crée la locationProfessionnel avec une idContrat renvoyant vers la location nouvellement créée et 	 	
+		conducteur qui renvoie vers le conducteur(num_permis)
 			
 - cas 2.2: il n'existe pas déjà de telle facturation
---> on demande le conducteur
---> si le conducteur n'existe pas dans la bdd, on le crée
---> on crée une nouvelle facturation avec un idFacturation incrémenté et la clé clientProfessionnel qui renvoie vers l'idclient de cette entreprise
---> on crée la location avec la clé étrangère facturation qui renvoie vers cette facturation	
---> on crée la locationProfessionnel avec une idContrat renvoyant vers la location nouvellement créée et conducteur qui renvoie vers le conducteur(num_permis)
+	--> on demande le conducteur
+	--> si le conducteur n'existe pas dans la bdd, on le crée
+	--> on crée une nouvelle facturation avec un idFacturation incrémenté et la clé clientProfessionnel qui renvoie 
+	vers l'idclient de cette entreprise
+	--> on crée la location avec la clé étrangère facturation qui renvoie vers cette facturation	
+	--> on crée la locationProfessionnel avec une idContrat renvoyant vers la location nouvellement créée et conducteur 
+	qui renvoie vers le conducteur(num_permis)
+
+Du coup je propose les tables suivantes :
+
+CREATE TABLE Facturation(
+  idFacturation SERIAL PRIMARY KEY,
+  clientParticulier INTEGER REFERENCES Particulier(id_client),
+  clientProfessionnel VARCHAR(13) REFERENCES Entreprise(id_client),
+  agent_com INTEGER NOT NULL,
+  montant MONEY,
+  date_payement DATE,
+  moyen_reglement Reglement,
+  etat_payement BOOLEAN NOT NULL,
+  FOREIGN KEY(agent_com) REFERENCES AgentCommercial(id_employe)
+);
+
+CREATE TABLE Location(
+  id_contrat SERIAL PRIMARY KEY,
+  date_debut DATE NOT NULL,
+  date_fin DATE,
+  km_parcourus DECIMAL NOT NULL,
+  vehicule_immat VARCHAR(7) NOT NULL,
+  entretien INTEGER UNIQUE NOT NULL,
+  facturation INTEGER NOT NULL,
+  FOREIGN KEY(vehicule_immat) REFERENCES Vehicule(immat),
+  FOREIGN KEY(entretien) REFERENCES Entretien(id_entretien),
+  FOREIGN KEY(facturation) REFERENCES Facturation(idFacturation)
+);
+
+CREATE TABLE LocationParticulier(
+  id_contrat INTEGER REFERENCES Location(id_contrat),
+  particulier INTEGER UNIQUE NOT NULL,
+  FOREIGN KEY(particulier) REFERENCES Particulier(id_client),
+  PRIMARY KEY(id_contrat)
+);
+
+CREATE TABLE LocationProfessionnel(
+  id_contrat INTEGER REFERENCES Location(id_contrat),
+  conducteur VARCHAR(13) UNIQUE NOT NULL,
+  FOREIGN KEY(conducteur) REFERENCES Conducteur(num_permis),
+  PRIMARY KEY(id_contrat)
+);
+
+
 			
