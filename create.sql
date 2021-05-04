@@ -1,5 +1,3 @@
-CREATE DATABASE NF18LocationVehicule;
-
 CREATE TABLE Agence(
   id_agence SERIAL PRIMARY KEY,
   nom VARCHAR,
