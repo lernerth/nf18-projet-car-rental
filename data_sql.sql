@@ -96,6 +96,20 @@ INSERT INTO Conducteur(num_permis, nom, prenom, date_naissance, entreprise) VALU
 	('109372573296', 'Oui-Oui', 'Medhi', 25/12/1994, 'Tchikita');
 
 LocationProfessionnel
-Facturation
-ValidationFinale
-Entretien
+
+INSERT INTO Facturation(idfacturation, clientParticulier, clientProfessionel, agent_com,
+                        montant, date_payment, moyen_reglement, etat_payement) 
+        VALUES  (1, NULL, '182640728375', 1, 1200, '12-09-2020', 'CB',     TRUE), 
+                (2, NULL, '039527393527', 2, 1500, '12-10-2020', 'CB',     TRUE),
+                (3, 1,    NULL,           1, 1000, '12-01-2021', 'paypal', TRUE);
+
+INSERT INTO ValidationFinale(agent_com, location, date_validation, resultat_validation)
+        VALUES  (1, 1, '15-1-2021', TRUE),
+                (1, 1, '13-1-2021', TRUE),
+                (2, 1, '14-1-2021', TRUE);
+
+INSERT INTO Entretien(identretien, date_entretien, date_controle, 
+                        resultat, societe, agent_tech)
+        VALUES  (1, '20-01-2021', '21-01-2021', 'abc', '36252187900034', 1),
+                (2, '20-02-2021', '21-03-2021', 'xyz', '55252187900021', 2),
+                (3, '20-03-2021', '21-05-2021', 'xyz', '36252187900034', 1);
