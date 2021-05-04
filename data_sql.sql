@@ -89,11 +89,11 @@ VALUES
 ('Machine de A','5544644433234444','quedescracks@gmail.com','0788665644','00322274431467');
 
 INSERT INTO Conducteur(num_permis, nom, prenom, date_naissance, entreprise) VALUES 
-	('182640728375', 'Dubois', 'Paul', 19/10/1970, 'Nike'),
-	('183946253046', 'Dupont', 'Etienne', 23/01/1986, 'Popelop'),
-	('039527393527', 'Sombrero', 'Antony', 06/05/1976, 'Popelop'),
-	('103846389847', 'Geigberg', 'David', 12/12/1992, 'ZumbaCafew'),
-	('109372573296', 'Oui-Oui', 'Medhi', 25/12/1994, 'Tchikita');
+	('182640721', 'Dubois', 'Paul', '19/10/1970', 1),
+	('183946253', 'Dupont', 'Etienne', '23/01/1986', 2),
+	('039527393', 'Sombrero', 'Antony', '06/05/1976', 1),
+	('103846389', 'Geigberg', 'David', '12/12/1992', 1),
+	('109372573', 'Oui-Oui', 'Medhi', '25/12/1994', 2);
 
 LocationProfessionnel
 
