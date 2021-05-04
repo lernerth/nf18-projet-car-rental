@@ -83,12 +83,6 @@ INSERT INTO Conducteur(num_permis, nom, prenom, date_naissance, entreprise) VALU
 	('039527393', 'Sombrero', 'Antony', '06/05/1976', 1),
 	('103846389', 'Geigberg', 'David', '12/12/1992', 1),
 	('109372573', 'Oui-Oui', 'Medhi', '25/12/1994', 2);
-	
-INSERT INTO Facturation(idfacturation, clientParticulier, clientProfessionnel, agent_com, montant, date_payement, moyen_reglement, etat_payement) 
-VALUES  
-(1, NULL, '182640721', 1, 1200, '12-09-2020', 'CB', TRUE), 
-(2, NULL, '039527393', 2, 1500, '12-10-2020', 'CB', TRUE),
-(3, NULL, '039527393', 2, 1500, '12-10-2020', 'CB', TRUE);
 
 INSERT INTO ValidationFinale(agent_com, location, date_validation, resultat_validation)
 VALUES  
@@ -117,3 +111,9 @@ INSERT INTO LocationParticulier(id_contrat, particulier )
 VALUES
 (1,1),
 (2,3);
+
+-- INSERT INTO Facturation(idfacturation, clientParticulier, clientProfessionnel, agent_com, montant, date_payement, moyen_reglement, etat_payement) 
+--VALUES  
+--(1, NULL, '182640721', 1, 1200, '12-09-2020', 'CB', TRUE), 
+--(2, NULL, '039527393', 2, 1500, '12-10-2020', 'CB', TRUE),
+--(3, NULL, '039527393', 2, 1500, '12-10-2020', 'CB', TRUE);
