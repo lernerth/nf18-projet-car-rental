@@ -64,9 +64,10 @@ VALUES
 ('HH123HH', 'golf', 'gasoil', 'gris', 4000, 1, 2);
 
 INSERT INTO Location(date_debut ,date_fin,km_parcourus,vehicule_immat,entretien ,facturation ) VALUES 
-('05/08/2020', '12/12/2020',3000,'AA123AA', 1,2),
-('07/03/2020', '06/01/2021',400,'DD123DD', 2,1),
-('07/03/2020', '06/01/2021',4000,'HH123HH', 3,2);
+('05/08/2020', '12/12/2020',3000,'AA123AA', 1,1),
+('07/03/2020', '06/01/2021',400,'DD123DD', 2,2),
+('07/03/2020', '06/01/2021',4000,'HH123HH', 3,3),
+('08/04/2020', '10/06/2021',1200,'GG123GG',4,3)
 
 
 INSERT INTO Particulier(nom,prenom,num_bancaire,mail ,telephone, adresse ,num_permis, date_naissance) 
@@ -95,7 +96,10 @@ INSERT INTO Conducteur(num_permis, nom, prenom, date_naissance, entreprise) VALU
 	('103846389', 'Geigberg', 'David', '12/12/1992', 1),
 	('109372573', 'Oui-Oui', 'Medhi', '25/12/1994', 2);
 
-LocationProfessionnel
+INSERT INTO LocationProfessionnel
+VALUES 
+(3,'182640721'),
+(4,'039527393');
 
 INSERT INTO Facturation(idfacturation, clientParticulier, clientProfessionel, agent_com,
                         montant, date_payment, moyen_reglement, etat_payement) 
