@@ -69,22 +69,22 @@ INSERT INTO Location(date_debut ,date_fin,km_parcourus,vehicule_immat,entretien 
 ('07/03/2020', '06/01/2021',4000,'HH123HH', 3,2);
 
 
-INSERT INTO Particulier(nom,prenom,num_bancaire,mail ,telephone, adresse ,num_permis, date_naissance) VALUES
+INSERT INTO Particulier(nom,prenom,num_bancaire,mail ,telephone, adresse ,num_permis, date_naissance) 
+VALUES
 ('Albert','Pinot', '0000 1111 2222 3333', 'albertpinot@gmail.com', '0695605788','20AW24096', '07/07/1998'),
 ('Charles','Renard', '1111 2222 0000 3333', 'charlesrenard@live.fr', '0678607898','19AW24696', '03/07/2000'),
 ('Louis','Barre', '1111 7777 0000 3333', 'louisbarre@live.fr', '0679907898','19AW28896', '03/08/2001');
-INSERT INTO LocationParticulier(id_contrat, particulier ) VALUES
+
+INSERT INTO LocationParticulier(id_contrat, particulier ) 
+VALUES
 (1,1),
 (2,3);
 
-INSERT INTO Entreprise(nom,num_bancaire,mail,tel,siret) VALUES 
-
+INSERT INTO Entreprise(nom,num_bancaire,mail,tel,siret) 
+VALUES 
 ('Nike','1234111122223333','nike@gmail.com','0646734566','11122294112344'),
-
 ('Zumbacafew','2223133356778444','zbc.jul@gmail.com','0744532458','33523256623454'),
-
 ('Popelop','2236654467553332','popelop@wanadoo.fr','0623443355','66665545544567'),
-
 ('Tchikita','4466443277664344','tchiki.tchiki@orange.fr','0677665454','33455566547654'),
 ('Machine de A','5544644433234444','quedescracks@gmail.com','0788665644','00322274431467');
 
