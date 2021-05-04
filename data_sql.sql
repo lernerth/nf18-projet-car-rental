@@ -84,7 +84,14 @@ VALUES
 ('Tchikita','4466 4432 7766 4344','tchiki.tchiki@orange.fr','0677665454','334 555 665'),
 
 ('Machine de A','5544 6444 3323 4444','quedescracks@gmail.com','0788665644','003 222 333');
-Conducteur
+
+INSERT INTO Conducteur(num_permis, nom, prenom, date_naissance, entreprise) VALUES 
+	('182640728375', 'Dubois', 'Paul', 19/10/1970, 'Nike'),
+	('183946253046', 'Dupont', 'Etienne', 23/01/1986, 'Popelop'),
+	('039527393527', 'Sombrero', 'Antony', 06/05/1976, 'Popelop'),
+	('103846389847', 'Geigberg', 'David', 12/12/1992, 'ZumbaCafew'),
+	('109372573296', 'Oui-Oui', 'Medhi', 25/12/1994, 'Tchikita');
+
 LocationProfessionnel
 Facturation
 ValidationFinale
