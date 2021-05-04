@@ -63,14 +63,14 @@ VALUES
 ('GG123GG', 'golf', 'essence', 'noir', 1200, 1, 1),
 ('HH123HH', 'golf', 'gasoil', 'gris', 4000, 1, 2);
 
-INSERT INTO Location(date_debut ,date_fin,vehicule_immat ,entretien INTEGER UNIQUE NOT NULL,facturation INTEGER NOT NULL) VALUES 
-( 05/08/2020, 12/12/2020,'AA123AA', 'bon etat',1,2),
-( 07/03/2020, 06/01/2021,'DD123DD', 'etat moyen',2,1),
-(07/03/2020, 06/01/2021,'HH123HH', 'etat moyen',2,2)
+INSERT INTO Location(date_debut ,date_fin,vehicule_immat,km_parcourus,entretien INTEGER UNIQUE NOT NULL,facturation INTEGER NOT NULL) VALUES 
+('05/08/2020', '12/12/2020',3000,'AA123AA', 'bon etat',1,2),
+('07/03/2020', '06/01/2021',400,'DD123DD', 'etat moyen',2,1),
+('07/03/2020', '06/01/2021',4000,'HH123HH', 'etat moyen',2,2);
 
 
 INSERT INTO Particulier(nom,prenom,num_bancaire VARCHAR NOT NULL,mail VARCHAR NOT NULL,telephone VARCHAR(10) NOT NULL,adresse ,num_permis VARCHAR(9) UNIQUE NOT NULL, date_naissance DATE NOT NULL) VALUES
-('Albert','Pinot', '0000 1111 2222 3333', 'albertpinot@gmail.com', '0695605
+('Albert','Pinot', '0000 1111 2222 3333', 'albertpinot@gmail.com', '0695605788'
 LocationParticulier
 Entreprise
 Conducteur
