@@ -24,4 +24,4 @@ TRUNCATE TABLE ValidationFinale CASCADE;
 
 -- Cas où l'on veut supprimer toute la base de données et toutes ses données
 
-DROP DATABASE NF18LocationVehicule;
+-- DROP DATABASE NF18LocationVehicule;
