@@ -1,0 +1,33 @@
+pour moi il y a qd même moyen de vérifier que le client est le même que la facturation :
+dans le code python, si l'utilisateur demande d'insérer une nouvelle location:
+
+- on lui demande si c'est une entreprise ou un particulier 
+cas 1: c'est un particulier (facturation doit renvoyer vers id de particulier)
+--> on regarde si le particulier existe dans la table Particulier, sinon on le crée
+--> on crée une facturation avec un idFacturation incrémenté et la clé clientParticulier qui renvoie vers l'idClient de ce particulier
+--> on crée la location avec la clé étrangère facturation qui renvoie vers cette facturation
+--> on crée la locationParticulier avec une idContrat renvoyant vers la location nouvellement créée et particulier qui renvoie vers l'idClient de ce particulier
+
+cas 2: c'est une entreprise (facturation doit renvoyer vers id d'entreprise)
+--> on regarde si il existe déjà une facturation concernant cette entreprise (et qui est encore impayée?)
+- cas 2.1: il existe déjà une telle facturation
+	--> on demande à l'utilisateur s'il veut mettre la nouvelle location sur la facturation déjà existante
+	cas 2.1.1: l'utilisateur répond oui
+		--> on lui demande le conducteur
+		--> si le conducteur n'existe pas dans la bdd, on le crée
+		--> on crée la location avec la clé étrangère facturation qui renvoie vers cette facturation 
+		--> on crée la locationProfessionnel avec une idContrat renvoyant vers la location nouvellement créée et conducteur qui renvoie vers le conducteur(num_permis)
+	cas 2.1.2: l'utilisateur répond non
+		--> on lui demande le conducteur
+		--> si le conducteur n'existe pas dans la bdd, on le crée
+		--> on crée une nouvelle facturation avec un idFacturation incrémenté et la clé clientProfessionnel qui renvoie vers l'idclient de cette entreprise
+		--> on crée la location avec la clé étrangère facturation qui renvoie vers cette facturation	
+		--> on crée la locationProfessionnel avec une idContrat renvoyant vers la location nouvellement créée et conducteur qui renvoie vers le conducteur(num_permis)
+			
+- cas 2.2: il n'existe pas déjà de telle facturation
+--> on demande le conducteur
+--> si le conducteur n'existe pas dans la bdd, on le crée
+--> on crée une nouvelle facturation avec un idFacturation incrémenté et la clé clientProfessionnel qui renvoie vers l'idclient de cette entreprise
+--> on crée la location avec la clé étrangère facturation qui renvoie vers cette facturation	
+--> on crée la locationProfessionnel avec une idContrat renvoyant vers la location nouvellement créée et conducteur qui renvoie vers le conducteur(num_permis)
+			
