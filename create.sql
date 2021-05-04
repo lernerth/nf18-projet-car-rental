@@ -161,7 +161,7 @@ CREATE TABLE LocationProfessionnel(
 CREATE TYPE Reglement AS ENUM('CB', 'paypal', 'cash', 'cheque');
 
 CREATE TABLE Facturation(
-  idFacturation INTEGER PRIMARY KEY,
+  idFacturation SERIAL PRIMARY KEY,
   clientParticulier INTEGER REFERENCES LocationParticulier(particulier),
   clientProfessionnel VARCHAR(13) REFERENCES LocationProfessionnel(conducteur),
   agent_com INTEGER NOT NULL,
