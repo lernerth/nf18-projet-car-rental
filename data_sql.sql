@@ -63,7 +63,7 @@ VALUES
 ('GG123GG', 'golf', 'essence', 'noir', 1200, 1, 1),
 ('HH123HH', 'golf', 'gasoil', 'gris', 4000, 1, 2);
 
-INSERT INTO Location(date_debut ,date_fin,vehicule_immat,km_parcourus,entretien ,facturation ) VALUES 
+INSERT INTO Location(date_debut ,date_fin,km_parcourus,vehicule_immat,entretien ,facturation ) VALUES 
 ('05/08/2020', '12/12/2020',3000,'AA123AA', 1,2),
 ('07/03/2020', '06/01/2021',400,'DD123DD', 2,1),
 ('07/03/2020', '06/01/2021',4000,'HH123HH', 2,2);
