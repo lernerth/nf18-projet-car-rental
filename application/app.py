@@ -47,6 +47,15 @@ def insert(table, colonnes, valeurs):
     curseur.execute(query, valeurs)
     conn.commit()
 
+def ajouter_agence():
+    valeurs = [
+        input("\tNom : "),
+        input("\tAdresse : "),
+        input("\tSIRET : "),
+        input("\tMail : "),
+        input("\tTéléphone : ")
+    ]
+    insert("Agence", ["nom", "adresse", "siret", "mail", "telephone"], valeurs)
 
 def ajouter_vehicule():
     valeurs = [
@@ -96,8 +105,8 @@ def quitter():
 menu_items = {
     "1": ["Afficher liste des agences", afficher_agences],
     "2": ["Afficher liste des véhicules", afficher_vehicules],
-    "3": ["Ajouter une véhicule", ajouter_vehicule],
-    "4": ["...", ...],
+    "3": ["Ajouter une agence", ajouter_agence],
+    "4": ["Ajouter une véhicule", ajouter_vehicule],
     "5": ["...", ...],
     "6": ["...", ...],
     "7": ["...", ...],
