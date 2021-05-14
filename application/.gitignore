@@ -1,2 +1,4 @@
 __pycache__/
 debug_config.py
+Pipfile*
+.vscode/
