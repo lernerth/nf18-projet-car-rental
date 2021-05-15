@@ -121,21 +121,50 @@ def ajouter_location():
        
 '''''''''''''''''' ANNULER LOCATION ''''''''''''''''''
 
-def def annuler_location():
+def annuler_location():
+    c_location = input("\t Contrat de la location à supprimer : ")
+    query = "DELETE CASCADE FROM Location WHERE id_contrat='%s';" %c_location
+    curseur.execute(query)
+    # pour que la cascade marche faut peut être rajouter une contrainte dans le code sql des tables LocatProf et locPart:
+    # ALTER TABLE nom_table
+    # ADD [CONSTRAINT fk_col_ref]         
+    # FOREIGN KEY (colonne)            
+    # REFERENCES table_ref(col_ref)
+    # ON DELETE CASCADE;  
 
+'''''''''''''''''' MODIFIER LOCATION ''''''''''''''''''
 
+def modifier_location():
+    # pour l'instant seuls des attributs string peuvent être modifiés
+    c_location = str(input("\tContrat de la location à modifier : "))
+    nom_col = str(input("\tParamètre à modifier : "))
+    nouvelle_valeur = input("\tNouvelle valeur : ")
+    query = "UPDATE Location SET %s='%s' WHERE id_contrat='%s';" %(nom_col, nouvelle_valeur, id_contrat)
+    curseur.execute(query)
+    
+    
+'''''''''''''''''' PAYER FACTURATION ''''''''''''''''''
+
+from datetime import date
+
+today = date.today()
+
+def payer_facturation():
+    # ce serait bien d'afficher le montant qui s'apprête à être réglé (plus tard)
+    id_facturation = input("\t id de la facturation : ")
+    moyen_payement = input("\t Moyen de payement : ")
+    query = "UPDATE Facturation SET date_payement=today, moyen_reglement=%s, etat_payement=1 WHERE idFacturation=%d;" %(moyen_payement, id_facturation)
+    curseur.execute(query)
+    
+    
+'''''''''''''''''' PAYER FACTURATION ''''''''''''''''''
+
+def validation_finale_location():
 
 
 
 
 """ 
-def modifier_location()
-def payer_facturation()
-
-Agent Commercial
-def validation_finale_location()
-
 Agent Technique
 def controler_apres_location()
-
 """
