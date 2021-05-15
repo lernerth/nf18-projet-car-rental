@@ -62,7 +62,7 @@ def argent_total():
     query = "SELECT SUM(montant) FROM Facturation inner join LocationParticulier ON LocationParticulier.particulier=Facturation.clientParticulier inner join Location ON Location.id_contrat=LocationParticulier.id_contrat inner join Vehicule ON Location.vehicule_immat=Vehicule.immat WHERE date_fin::date<current_date and Vehicule.immat=%s" %x
     curseur.execute(query)
     raw1 = cur.fetchone()
-    query = "SELECT SUM(montant) FROM Facturation inner join LocationProfessionel ON LocationProfessionel.conducteur=Facturation.clientProfessionel inner join Location ON Location.id_contrat=LocationProfessionnel.id_contrat inner join Vehicule onLocation.vehicule_immat=Vehicule.immat WHERE etat_payement='1' AND date_fin::date<current_date and Vehicule.immat=%s" %x
+    query = "SELECT SUM(montant) FROM Facturation inner join LocationProfessionel ON LocationProfessionel.conducteur=Facturation.clientProfessionel inner join Location ON Location.id_contrat=LocationProfessionnel.id_contrat inner join Vehicule onLocation.vehicule_immat=Vehicule.immat WHERE etat_payement='TRUE' AND date_fin::date<current_date and Vehicule.immat=%s" %x
     curseur.execute(query)
     raw2 = cur.fetchone()
     a= raw1 + raw2
