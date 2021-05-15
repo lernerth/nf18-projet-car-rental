@@ -35,3 +35,7 @@ def insert(table, colonnes, valeurs):
         table, ",".join(colonnes), ",".join(["%s"] * len(colonnes)))
     curseur.execute(query, valeurs)
     conn.commit()
+
+def afficher_vehicules():
+    for row in select_all("Vehicule"):
+        print(row)

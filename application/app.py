@@ -54,9 +54,7 @@ def afficher_agences():
         print(row)
 
 
-def afficher_vehicules():
-    for row in select_all("Vehicule"):
-        print(row)
+
 
 
 """
@@ -72,7 +70,7 @@ def quitter():
 def ajouter_location_professionnel(id_contrat):
     valeurs = [
         id_contrat,
-        input("\tConducteur (num permis) : ")   
+        input("\tConducteur (num permis) : ")
     ]
     insert("LocationProfessionnel", ["id_contrat", "conducteur"], valeurs)
 # Définir listes des menus ici
@@ -81,13 +79,14 @@ def ajouter_location_professionnel(id_contrat):
 #       y: texte
 #       z: la fonction correspondante
 menu_items = {
-    "1": ["Afficher liste des agences", afficher_agences],
-    "2": ["Afficher liste des véhicules", afficher_vehicules],
-    "3": ["Ajouter une agence", ajouter_agence],
-    "4": ["Ajouter une véhicule", ajouter_vehicule],
-    "5": ["Bilan par categorie", lambda : bang.bilan_par_categorie(curseur)],
-    "6": ["Thomas", lambda : thomas.bilan_client(curseur)],
-    "7": ["Violette", lambda : violette.ajouter_entretien(curseur)],
+    "1": ["Afficher liste des véhicules", afficher_vehicules],
+    "2": ["Ajouter une véhicule", ajouter_vehicule],
+    "3": ["Ajouter une location", lambda : violette.ajouter_location(curseur)],
+    "4": ["Annuler une location", lambda : violette.annuler_location(curseur)],
+    "5": ["Modifier une location", lambda : violette.modifier_location(curseur)],
+    "6": ["Payer une facturation", lambda : violette.payer_facturation(curseur)],
+    "7": ["Valider une location", violette.validation_finale_location],
+    "8": ["Controler un entretien", violette.controler_apres_location],
     "0": ["Quitter le programme", quitter]
 }
 
