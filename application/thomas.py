@@ -15,10 +15,10 @@ def bilan_client(curseur):
     row = curseur.fetchone()
     if row:
         afficher_client_particulier(row)
-        nombre_locations_encours(curseur, row)
-        nombre_locations_passees(curseur, row)
-        nombre_locations_prevues(curseur, row)
-        total_paye(curseur, row)
+        nombre_locations_encours(curseur, row[0])
+        nombre_locations_passees(curseur, row[0])
+        nombre_locations_prevues(curseur, row[0])
+        total_paye(curseur, row[0])
         print("Nombre de locations passées : ", nb_loc_passees)
         print("Nombre de locations en cours : ", nb_loc_encours)
         print("Nombre de locations prévues : ", nb_loc_prevues)
@@ -29,11 +29,10 @@ def bilan_client(curseur):
         row = curseur.fetchone()
         if row:
             afficher_client_pro(row)
-            afficher_client_particulier(row)
-            nombre_locations_encours_pro(curseur, row)
-            nombre_locations_passees_pro(curseur, row)
-            nombre_locations_prevues_pro(curseur, row)
-            total_paye_pro(curseur, row)
+            nombre_locations_encours_pro(curseur, row[0])
+            nombre_locations_passees_pro(curseur, row[0])
+            nombre_locations_prevues_pro(curseur, row[0])
+            total_paye_pro(curseur, row[0])
             print("Nombre de locations passées : ", nb_loc_passees_pro)
             print("Nombre de locations en cours : ", nb_loc_encours_pro)
             print("Nombre de locations prévues : ", nb_loc_prevues_pro)
@@ -59,7 +58,7 @@ def afficher_client_pro(client):
 
 def nombre_locations_passees(curseur, client):
     global nb_loc_passees
-    sql = "SELECT COUNT(*) FROM Location JOIN LocationPartiulier ON Location.id_contrat=LocationParticulier.id_contrat WHERE LocationParticulier.particulier = %s AND Location.date_fin::date < current_date"
+    sql = "SELECT COUNT(*) FROM Location JOIN LocationParticulier ON Location.id_contrat=LocationParticulier.id_contrat WHERE LocationParticulier.particulier = %s AND Location.date_fin::date < current_date"
     curseur.execute(sql, (client,))
     result = curseur.fetchone()
     nb_loc_passees = result[0]
@@ -68,7 +67,7 @@ def nombre_locations_passees(curseur, client):
 
 def nombre_locations_encours(curseur, client):
     global nb_loc_encours
-    sql = "SELECT COUNT (*) FROM Location JOIN LocationPartiulier ON Location.id_contrat=LocationParticulier.id_contrat WHERE LocationParticulier.particulier = %s AND Location.date_fin::date > current_date and Location.date_debut::date < current_date"
+    sql = "SELECT COUNT (*) FROM Location JOIN LocationParticulier ON Location.id_contrat=LocationParticulier.id_contrat WHERE LocationParticulier.particulier = %s AND Location.date_fin::date > current_date and Location.date_debut::date < current_date"
     curseur.execute(sql, (client,))
     result = curseur.fetchone()
     nb_loc_encours = result[0]
@@ -77,7 +76,7 @@ def nombre_locations_encours(curseur, client):
 
 def nombre_locations_prevues(curseur, client):
     global nb_loc_prevues
-    sql = "SELECT COUNT(*) FROM Location JOIN LocationPartiulier ON Location.id_contrat=LocationParticulier.id_contrat WHERE LocationParticulier.particulier = %s AND Location.date_debut::date > current_date"
+    sql = "SELECT COUNT(*) FROM Location JOIN LocationParticulier ON Location.id_contrat=LocationParticulier.id_contrat WHERE LocationParticulier.particulier = %s AND Location.date_debut::date > current_date"
     curseur.execute(sql, (client,))
     result = curseur.fetchone()
     nb_loc_prevues = result[0]
@@ -104,7 +103,7 @@ def nombre_locations_passees_pro(curseur, client):
 
 def nombre_locations_encours_pro(curseur, client):
     global nb_loc_encours_pro
-    sql = "SELECT COUNT(*) FROM Location JOIN LocationProfessionnel ON Location.id_contrat = LocationProfessionnel.id_contrat JOIN Conducteur ON LocationProfessionnel.conducteur = Conducteur.num_permis WHERE Conducteur.entreprise = %s AND Location.date_fin::date > CURRENT_DATE AND Location.date_debut::date < CURRENT DATE"
+    sql = "SELECT COUNT(*) FROM Location JOIN LocationProfessionnel ON Location.id_contrat = LocationProfessionnel.id_contrat JOIN Conducteur ON LocationProfessionnel.conducteur = Conducteur.num_permis WHERE Conducteur.entreprise = %s AND Location.date_fin::date > CURRENT_DATE AND Location.date_debut::date < CURRENT_DATE"
     curseur.execute(sql,(client,))
     result = curseur.fetchone()
     nb_loc_encours_pro = result[0]
