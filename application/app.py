@@ -1,21 +1,10 @@
-try:
-    import debug_config as cfg
-except:
-    import config as cfg
 from utils import *
-import psycopg2
 from decimal import Decimal
 import bang
 import thomas
 import violette
 
 
-"""
-    Connecter à la base de données
-"""
-conn = psycopg2.connect(dbname=cfg.DBNAME, user=cfg.DBUSER,
-                        password=cfg.DBPWD, host=cfg.DBHOST, port=cfg.DBPORT)
-curseur = conn.cursor()
 
 """
     Afficher un menu
