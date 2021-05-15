@@ -25,9 +25,14 @@ def bilan_par_categorie(curseur):
                     GROUP BY argent.categorie) AS statistique ON statistique.categorie = encours.categorie;"""
     curseur.execute(query)
     resultats = curseur.fetchall()
-    print([desc[0] for desc in curseur.description])
+    print("\n")
     for row in resultats:
-        print(row)
+        print("Pour la catégorie",row[0], ": ")
+        print("\tNombre de véhicules total dans cette catégorie : ",row[1])
+        print("\tNombre de véhicules de cette catégorie actuellement en location : ",row[2])
+        print("\tProportion des vehicules entrant dans cette catégorie : ",row[3])
+        print("\tTotal d'argent généré par les locations de cette catégorie : ", row[4])
+        print("\n")
 
 def trace_agent(curseur):
     trace_des_facturation(curseur)
@@ -50,16 +55,6 @@ def trace_des_controles(curseur):
                     JOIN Facturation ON Facturation.agent_com = Employe.id_employe
                     ORDER BY id_employe;"""
     print("La trace des operations sur les controles de chaque agent : ")
-    curseur.execute(query)
-    resultats = curseur.fetchall()
-    for row in resultats:
-        print(row)
-
-def trace_des_locations(curseur):
-    query = """SELECT id_employe, nom, prenom, Entretien.* FROM Employe
-                    JOIN Entretien ON Entretien.agent_tech = Employe.id_employe
-                    ORDER BY id_employe;"""
-    print("La trace des operations sur les validations finales des locations de chaque agent : ")
     curseur.execute(query)
     resultats = curseur.fetchall()
     for row in resultats:
