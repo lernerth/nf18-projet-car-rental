@@ -9,25 +9,31 @@ global nb_loc_encours_pro
 
 
 def bilan_client(curseur):
-    client = input("Entrer le numéro de client : ")
-    sql = "SELECT * FROM Particulier WHERE id_client = %s"
-    curseur.execute(sql, (client,))
-    row = curseur.fetchone()
-    if row:
-        afficher_client_particulier(row)
-        nombre_locations_encours(curseur, row[0])
-        nombre_locations_passees(curseur, row[0])
-        nombre_locations_prevues(curseur, row[0])
-        total_paye(curseur, row[0])
-        print("Nombre de locations passées : ", nb_loc_passees)
-        print("Nombre de locations en cours : ", nb_loc_encours)
-        print("Nombre de locations prévues : ", nb_loc_prevues)
-        print("Total payé par le client : ", paye)
-    else:
-        sql = "SELECT * FROM Entreprise WHERE id_client = %s"
-        curseur.execute(sql, (client,))
-        row = curseur.fetchone()
-        if row:
+    try :
+        choix = int(input("""Quel type de client recherchez-vous ? 
+                                    1.Client Particulier 
+                                    2.Client Professionnel (entreprise)
+                          """))
+        if choix == 1:
+            client = input("Entrer le numéro de client : ")
+            sql = "SELECT * FROM Particulier WHERE id_client = %s"
+            curseur.execute(sql, (client,))
+            row = curseur.fetchone()
+            afficher_client_particulier(row)
+            nombre_locations_encours(curseur, row[0])
+            nombre_locations_passees(curseur, row[0])
+            nombre_locations_prevues(curseur, row[0])
+            total_paye(curseur, row[0])
+            print("Nombre de locations passées : ", nb_loc_passees)
+            print("Nombre de locations en cours : ", nb_loc_encours)
+            print("Nombre de locations prévues : ", nb_loc_prevues)
+            print("Total payé par le client : ", paye)
+
+        elif choix == 2 :
+            client = input("Entrer le numéro de client : ")
+            sql = "SELECT * FROM Entreprise WHERE id_client = %s"
+            curseur.execute(sql, (client,))
+            row = curseur.fetchone()
             afficher_client_pro(row)
             nombre_locations_encours_pro(curseur, row[0])
             nombre_locations_passees_pro(curseur, row[0])
@@ -37,8 +43,11 @@ def bilan_client(curseur):
             print("Nombre de locations en cours : ", nb_loc_encours_pro)
             print("Nombre de locations prévues : ", nb_loc_prevues_pro)
             print("Total payé par le client : ", paye_pro)
-        else:
-            print("Ce client n'existe pas !")
+
+    except ValueError:
+        print("Choix incorrect, il faut entrer un entier de 1 à 4")
+        return 0
+
 
 
 def afficher_client_particulier(client):
