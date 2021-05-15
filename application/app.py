@@ -4,6 +4,7 @@ except:
     import config as cfg
 import psycopg2
 from decimal import Decimal
+import bang
 
 
 """
@@ -107,7 +108,7 @@ menu_items = {
     "2": ["Afficher liste des véhicules", afficher_vehicules],
     "3": ["Ajouter une agence", ajouter_agence],
     "4": ["Ajouter une véhicule", ajouter_vehicule],
-    "5": ["...", ...],
+    "5": ["Bilan par categorie", lambda : bang.bilan_par_categorie(curseur)],
     "6": ["...", ...],
     "7": ["...", ...],
     "0": ["Quitter le programme", quitter]
