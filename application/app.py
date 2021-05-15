@@ -86,7 +86,10 @@ menu_items = {
     "5": ["Modifier une location", lambda : violette.modifier_location(curseur)],
     "6": ["Payer une facturation", lambda : violette.payer_facturation(curseur)],
     "7": ["Valider une location", violette.validation_finale_location],
-    "8": ["Controler un entretien", violette.controler_apres_location],
+    "8": ["Controler un entretien", lambda : violette.controler_apres_location(curseur)],
+    "9": ["Bilan par client", lambda : thomas.bilan_client(curseur)],
+    # "10": ["Bilan par vehicule", lambda : Noe.(curseur)],
+    "11": ["Bilan par categorie", lambda : bang.bilan_par_categorie(curseur)],
     "0": ["Quitter le programme", quitter]
 }
 

@@ -177,10 +177,12 @@ def validation_finale_location():
 
 ########## CONTROLE PAR UN AGENT TECH = MAJ DE ENTRETIEN ##########
 
-def controler_apres_location():
+def controler_apres_location(curseur):
     id_entretien = input("\tId de l'entretien : ")
-    date_ent = input("\tDate_entretien : "),
-    date_ctrl = input("\tDate_controle : "),
+    date_ent = input("\tDate_entretien : ")
+    date_ctrl = input("\tDate_controle : ")
     resultat = input("\tResultat du controle : ")
-    #query = "UPDATE Entretien SET date_entretien=%s
+    query = "UPDATE Entretien SET date_entretien='%s', date_controle='%s', resultat='%s' WHERE id_entretien='%s';" %(date_ent, date_ctrl, resultat, id_entretien)
+    curseur.execute(query)
+    conn.commit()
 
