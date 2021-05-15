@@ -25,5 +25,11 @@ def bilan_par_categorie(curseur):
                     GROUP BY argent.categorie) AS statistique ON statistique.categorie = encours.categorie;"""
     curseur.execute(query)
     resultats = curseur.fetchall()
+    print("\n")
     for row in resultats:
-        print(row)
+        print("Pour la catégorie",row[0], ": ")
+        print("\tNombre de véhicules total dans cette catégorie : ",row[1])
+        print("\tNombre de véhicules de cette catégorie actuellement en location : ",row[2])
+        print("\tProportion des vehicules entrant dans cette catégorie : ",row[3])
+        print("\tTotal d'argent généré par les locations de cette catégorie : ", row[4])
+        print("\n")
