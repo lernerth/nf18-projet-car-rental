@@ -3,6 +3,7 @@ from decimal import Decimal
 import bang
 import thomas
 import violette
+import Noe
 
 
 
@@ -88,7 +89,7 @@ menu_items = {
     "7": ["Valider une location", violette.validation_finale_location],
     "8": ["Controler un entretien", lambda : violette.controler_apres_location(curseur)],
     "9": ["Bilan par client", lambda : thomas.bilan_client(curseur)],
-    # "10": ["Bilan par vehicule", lambda : Noe.(curseur)],
+    "10": ["Bilan par vehicule", Noe.bilan_vehicule],
     "11": ["Bilan par categorie", lambda : bang.bilan_par_categorie(curseur)],
     "0": ["Quitter le programme", quitter]
 }
