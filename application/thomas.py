@@ -10,7 +10,7 @@ global nb_loc_encours_pro
 
 def bilan_client(curseur):
     try :
-        choix = int(input("""Quel type de client recherchez-vous ? 
+        choix = int(input("""\nQuel type de client recherchez-vous ? 
                                     1.Client Particulier 
                                     2.Client Professionnel (entreprise)
                           """))
@@ -19,31 +19,35 @@ def bilan_client(curseur):
             sql = "SELECT * FROM Particulier WHERE id_client = %s"
             curseur.execute(sql, (client,))
             row = curseur.fetchone()
-            afficher_client_particulier(row)
-            nombre_locations_encours(curseur, row[0])
-            nombre_locations_passees(curseur, row[0])
-            nombre_locations_prevues(curseur, row[0])
-            total_paye(curseur, row[0])
-            print("Nombre de locations passées : ", nb_loc_passees)
-            print("Nombre de locations en cours : ", nb_loc_encours)
-            print("Nombre de locations prévues : ", nb_loc_prevues)
-            print("Total payé par le client : ", paye)
-
+            if row :
+                afficher_client_particulier(row)
+                nombre_locations_encours(curseur, row[0])
+                nombre_locations_passees(curseur, row[0])
+                nombre_locations_prevues(curseur, row[0])
+                total_paye(curseur, row[0])
+                print("\nNombre de locations passées : ", nb_loc_passees)
+                print("Nombre de locations en cours : ", nb_loc_encours)
+                print("Nombre de locations prévues : ", nb_loc_prevues)
+                print("Total payé par le client : ", paye, "\n\n")
+            else :
+                print("Ce client n'existe pas ! \n\n")
         elif choix == 2 :
             client = input("Entrer le numéro de client : ")
             sql = "SELECT * FROM Entreprise WHERE id_client = %s"
             curseur.execute(sql, (client,))
             row = curseur.fetchone()
-            afficher_client_pro(row)
-            nombre_locations_encours_pro(curseur, row[0])
-            nombre_locations_passees_pro(curseur, row[0])
-            nombre_locations_prevues_pro(curseur, row[0])
-            total_paye_pro(curseur, row[0])
-            print("Nombre de locations passées : ", nb_loc_passees_pro)
-            print("Nombre de locations en cours : ", nb_loc_encours_pro)
-            print("Nombre de locations prévues : ", nb_loc_prevues_pro)
-            print("Total payé par le client : ", paye_pro)
-
+            if row :
+                afficher_client_pro(row)
+                nombre_locations_encours_pro(curseur, row[0])
+                nombre_locations_passees_pro(curseur, row[0])
+                nombre_locations_prevues_pro(curseur, row[0])
+                total_paye_pro(curseur, row[0])
+                print("\nNombre de locations passées : ", nb_loc_passees_pro)
+                print("Nombre de locations en cours : ", nb_loc_encours_pro)
+                print("Nombre de locations prévues : ", nb_loc_prevues_pro)
+                print("Total payé par le client : ", paye_pro, "\n\n")
+            else :
+                print("Ce clien n'existe pas !\n\n")
     except ValueError:
         print("Choix incorrect, il faut entrer un entier de 1 à 4")
         return 0
