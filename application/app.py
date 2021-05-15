@@ -2,6 +2,7 @@ try:
     import debug_config as cfg
 except:
     import config as cfg
+import pandas as pd
 import psycopg2
 from decimal import Decimal
 import bang
