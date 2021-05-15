@@ -1,17 +1,15 @@
-from utils import *
+'''''''''''''''''' AJOUTER LOCATION ''''''''''''''''''
 
-################# AJOUTER LOCATION #################
+''' entretien ''' 
 
-#### entretien ####
-
-def ajouter_entretien(curseur):
+def ajouter_entretien():
     print("Une location doit être associée à un entretien :\n")
     valeurs = [
         input("\tSociété d'entretien :"),
         input("\tAgent technique : ")
      ]
     insert("Entretien", ["societe", "agent_tech"], valeurs) # voir plus tard pour ajouter date etc.
-
+    
     # on récupère l'id de cet entretien
     query = "SELECT id_entretien FROM Entretien;"
     curseur.execute(query)
@@ -47,7 +45,7 @@ def ajouter_facturation_professionnel(idClient):
 def ajouter_location_professionnel(id_contrat):
     valeurs = [
         id_contrat,
-        input("\tConducteur (num permis) : ")
+        input("\tConducteur (num permis) : ")   
     ]
     insert("LocationProfessionnel", ["id_contrat", "conducteur"], valeurs)
 
@@ -57,33 +55,33 @@ def ajouter_location_particulier(id_contrat, idClient):
         idClient
     ]
 
-''' Location générale '''
+''' Location générale ''' 
 
 def ajouter_location():
 
     typeClient = input("\tClient Professionnel (1) ou Particulier (2) : ")
     while typeClient != 1 and typeClient != 2:
-        typeClient = input("\tTapez 1 ou 2 pour indiquer le type du client : ")
-
+        typeClient = input("\tTapez 1 ou 2 pour indiquer le type du client : "
+        
     idClient = input("\tIdentifiant du client : ")
-
+    
     # on récupère l'immatriculation du véhicule:
     immat = str(input("\tImmatriculation du véhicule :"))
-
+    
     # on récupère son nombre de kilomètres:
     query = "SELECT nb_km FROM Vehicule WHERE immat='%s';" %immat
     curseur.execute(query)
     nb_km = curseur.fetchone()
-
+    
     # on associe la location à un entretien
     id_entretien = ajouter_entretien()
-
+    
     # on crée une facturation
     if typeClient == 1:
         ajouter_facturation_professionnel(idClient)
     else:
         ajouter_facturation_particulier(idClient)
-
+    
     # on récupère l'id de la facturation qui vient d'être crée
     query = "SELECT idFacturation FROM Facturation;"
     curseur.execute(query)
@@ -92,18 +90,18 @@ def ajouter_location():
     while next_raw:
         raw = next_raw
         next_raw = cur.fetchone()
-    id_facturation = raw
-
+    id_facturation = raw 
+   
     valeurs = [
         input("\tDate debut : "),
         input("\tDate fin : "),
         nb_km,
         immat,
         id_entretien,
-        id_facturation
+        id_facturation 
     ]
     insert("Location", ["date_debut", "date_fin", "km_parcourus", "vehicule_immat", "entretien", "facturation"], valeurs)
-
+    
     # on récupère l'id contrat de la location qui vient d'être créée
     query = "SELECT id_contrat FROM Location;"
     curseur.execute(query)
@@ -112,16 +110,16 @@ def ajouter_location():
     while next_raw:
         raw = next_raw
         next_raw = cur.fetchone()
-    id_contrat = raw
-
+    id_contrat = raw 
+    
     # on remplit ensuite la table LocationParticulier ou la table LocationProfessionnel c'est selon
     if typeClient == 1:
         ajouter_location_professionnel(id_contrat)
     else:
         ajouter_location_particulier(id_contrat, idClient)
-
-
-############### ANNULER LOCATION ###############
+        
+       
+'''''''''''''''''' ANNULER LOCATION ''''''''''''''''''
 
 def annuler_location():
     c_location = input("\t Contrat de la location à supprimer : ")
@@ -129,12 +127,12 @@ def annuler_location():
     curseur.execute(query)
     # pour que la cascade marche faut peut être rajouter une contrainte dans le code sql des tables LocatProf et locPart:
     # ALTER TABLE nom_table
-    # ADD [CONSTRAINT fk_col_ref]
-    # FOREIGN KEY (colonne)
+    # ADD [CONSTRAINT fk_col_ref]         
+    # FOREIGN KEY (colonne)            
     # REFERENCES table_ref(col_ref)
-    # ON DELETE CASCADE;
+    # ON DELETE CASCADE;  
 
-############### MODIFIER LOCATION ###############
+'''''''''''''''''' MODIFIER LOCATION ''''''''''''''''''
 
 def modifier_location():
     # pour l'instant seuls des attributs string peuvent être modifiés
@@ -143,9 +141,9 @@ def modifier_location():
     nouvelle_valeur = input("\tNouvelle valeur : ")
     query = "UPDATE Location SET %s='%s' WHERE id_contrat='%s';" %(nom_col, nouvelle_valeur, id_contrat)
     curseur.execute(query)
-
-
-############### PAYER FACTURATION ###############
+    
+    
+'''''''''''''''''' PAYER FACTURATION ''''''''''''''''''
 
 from datetime import date
 
@@ -157,16 +155,28 @@ def payer_facturation():
     moyen_payement = input("\t Moyen de payement : ")
     query = "UPDATE Facturation SET date_payement=today, moyen_reglement=%s, etat_payement=1 WHERE idFacturation=%d;" %(moyen_payement, id_facturation)
     curseur.execute(query)
-
-
-############### PAYER FACTURATION ###############
+    
+    
+'''''''''''''''''' VALIDATION FINALE PAR UN AGENT COM ''''''''''''''''''
 
 def validation_finale_location():
-    ...
+    valeurs = [
+        input("\t Agent Comm : "),
+        input("\t Contrat de la loc : "),
+        today,
+        input("\tResultat de la validation (1:ok / 0:not ok)")
+    ]
+    insert("ValidationFinale", ["agent_com", "location", "date_validation", resultat_validation"], valeurs) 
 
 
+'''''''''''''''''' CONTROLE PAR UN AGENT TECH = MAJ DE ENTRETIEN ''''''''''''''''''
 
-"""
-Agent Technique
-def controler_apres_location()
-"""
+def controler_apres_location():
+    id_entretien = input("\tId de l'entretien : ")
+    date_ent = input("\tDate_entretien : "),
+    date_ctrl = input("\tDate_controle : "),
+    resultat = input("\tResultat du controle : ")
+    query = "UPDATE Entretien SET date_entretien=%s
+        
+        
+    
