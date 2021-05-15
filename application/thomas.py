@@ -37,7 +37,7 @@ def bilan_client():
             print("Nombre de locations passées : ", nb_loc_passees_pro)
             print("Nombre de locations en cours : ", nb_loc_encours_pro)
             print("Nombre de locations prévues : ", nb_loc_prevues_pro)
-            print("Total payé par le client : ", paye)
+            print("Total payé par le client : ", paye_pro)
         else:
             print("Ce client n'existe pas !")
 
