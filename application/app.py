@@ -2,10 +2,12 @@ try:
     import debug_config as cfg
 except:
     import config as cfg
-import pandas as pd
+from utils import *
 import psycopg2
 from decimal import Decimal
 import bang
+import thomas
+import violette
 
 
 """
@@ -27,27 +29,7 @@ def menu(menu_items):
     return menu_items[input("> ")][-1]
 
 
-"""
-    Retrouver toutes les lignes d'un table
-"""
 
-
-def select_all(table):
-    query = "SELECT * FROM %s" % table
-    curseur.execute(query)
-    return curseur.fetchall()
-
-
-"""
-    Insérer des données
-"""
-
-
-def insert(table, colonnes, valeurs):
-    query = "INSERT INTO %s(%s) VALUES(%s);" % (
-        table, ",".join(colonnes), ",".join(["%s"] * len(colonnes)))
-    curseur.execute(query, valeurs)
-    conn.commit()
 
 def ajouter_agence():
     valeurs = [
@@ -98,7 +80,12 @@ def quitter():
     conn.close()
     exit(0)
 
-
+def ajouter_location_professionnel(id_contrat):
+    valeurs = [
+        id_contrat,
+        input("\tConducteur (num permis) : ")   
+    ]
+    insert("LocationProfessionnel", ["id_contrat", "conducteur"], valeurs)
 # Définir listes des menus ici
 # Forme: "x": ["y", z]
 # Avec: x: numero de menu
@@ -110,8 +97,8 @@ menu_items = {
     "3": ["Ajouter une agence", ajouter_agence],
     "4": ["Ajouter une véhicule", ajouter_vehicule],
     "5": ["Bilan par categorie", lambda : bang.bilan_par_categorie(curseur)],
-    "6": ["...", ...],
-    "7": ["...", ...],
+    "6": ["Thomas", lambda : thomas.bilan_client(curseur)],
+    "7": ["Violette", lambda : violette.ajouter_entretien(curseur)],
     "0": ["Quitter le programme", quitter]
 }
 
