@@ -97,7 +97,7 @@ menu_items = {
 
 def main():
     while True:
-        print("Sélectionnez une option :")
+        print("\nSélectionnez une option :")
         action_choisie = menu(menu_items)
         action_choisie()
 
