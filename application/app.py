@@ -15,7 +15,7 @@ import Noe
 
 def menu(menu_items):
     for item in menu_items:
-        print(item, ". ", menu_items[item][0], sep="", end="\n")
+        print("\t", item, ". ", menu_items[item][0], sep="", end="\n")
     return menu_items[input("> ")][-1]
 
 
@@ -97,6 +97,7 @@ menu_items = {
 
 def main():
     while True:
+        print("Sélectionnez une option :")
         action_choisie = menu(menu_items)
         action_choisie()
 
