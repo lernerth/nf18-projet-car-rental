@@ -1,6 +1,27 @@
+from utils import *
+
 # Bilan et statistiques par catégorie
 
-def bilan_par_categorie(curseur):
+def afficher_vehicules():
+    afficher("Liste des vehicules", select_all("Vehicule"))
+
+
+
+def ajouter_vehicule():
+    valeurs = [
+        input("\tImmatriculation : "),
+        input("\tModele : "),
+        input("\tType carburant : "),
+        input("\tCouleur : "),
+        input("\tNb kilometres parcourus : "),
+        input("\tID agence ? "),
+        input("\tID d'agent technique : ")
+    ]
+    insert("Vehicule", ["immat", "modele", "carburant",
+           "couleur", "nb_km", "agence", "agent_tech"], valeurs)
+
+
+def bilan_par_categorie():
     query =  """SELECT 	total.categorie, total.nb_vehicules, encours.nb_vehicules AS nb_vehicules_en_location,
                         total.pourcentage AS pourcentage_total_vehicules, statistique.argent_rapporte
                 FROM
@@ -34,28 +55,35 @@ def bilan_par_categorie(curseur):
         print("\tTotal d'argent généré par les locations de cette catégorie : ", row[4])
         print("\n")
 
-def trace_agent(curseur):
-    trace_des_facturation(curseur)
-    trace_des_controles(curseur)
-    trace_des_locations(curseur)
 
 
-def trace_des_facturation(curseur):
+def trace_des_facturation():
     query = """SELECT id_employe, nom, prenom, Facturation.* FROM Employe
                     JOIN Facturation ON Facturation.agent_com = Employe.id_employe
                     ORDER BY id_employe;"""
-    print("La trace des operations sur les facturations de chaque agent : ")
     curseur.execute(query)
     resultats = curseur.fetchall()
-    for row in resultats:
-        print(row)
+    afficher("\nLa trace des operations sur les facturations de chaque agent :", resultats)
 
-def trace_des_controles(curseur):
-    query = """SELECT id_employe, nom, prenom, Facturation.* FROM Employe
-                    JOIN Facturation ON Facturation.agent_com = Employe.id_employe
+
+def trace_des_controles():
+    query = """SELECT id_employe, nom, prenom, Entretien.* FROM Employe
+                    JOIN Entretien ON Entretien.agent_tech = Employe.id_employe
                     ORDER BY id_employe;"""
-    print("La trace des operations sur les controles de chaque agent : ")
     curseur.execute(query)
     resultats = curseur.fetchall()
-    for row in resultats:
-        print(row)
+    afficher("\nLa trace des operations sur les controles de chaque agent : ", resultats)
+
+
+def trace_des_locations():
+    query = """SELECT id_employe, nom, prenom, ValidationFinale.* FROM Employe
+                    JOIN ValidationFinale ON ValidationFinale.agent_com = Employe.id_employe
+                    ORDER BY id_employe;"""
+    curseur.execute(query)
+    resultats = curseur.fetchall()
+    afficher("\nLa trace des operations sur les controles de chaque agent : ", resultats)
+
+def trace_agent():
+    trace_des_facturation()
+    trace_des_controles()
+    trace_des_locations()

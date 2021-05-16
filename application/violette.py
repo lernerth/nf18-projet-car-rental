@@ -6,10 +6,10 @@ from utils import *
 
 # 36252187900034
 
-def ajouter_entretien(curseur):
+def ajouter_entretien():
     print("Une location doit être associée à un entretien :\n")
     valeurs = [
-        input("\tSociété d'entretien :"),
+        input("\tSociété d'entretien (num SIRET) :"),
         input("\tAgent technique : ")
      ]
     insert("Entretien", ["societe", "agent_tech"], valeurs) # voir plus tard pour ajouter date etc.
@@ -60,10 +60,11 @@ def ajouter_location_particulier(id_contrat, idClient):
         id_contrat,
         idClient
     ]
+    insert("LocationParticulier", ["id_contrat", "particulier"], valeurs)
 
 ### Location générale ###
 
-def ajouter_location(curseur):
+def ajouter_location():
 
     typeClient = input("\tClient Professionnel (1) ou Particulier (2) : ")
     while typeClient != "1" and typeClient != "2":
@@ -80,7 +81,7 @@ def ajouter_location(curseur):
     nb_km = curseur.fetchone()
 
     # on associe la location à un entretien
-    id_entretien = ajouter_entretien(curseur)
+    id_entretien = ajouter_entretien()
 
     # on crée une facturation
     if typeClient == 1:
@@ -109,7 +110,7 @@ def ajouter_location(curseur):
     insert("Location", ["date_debut", "date_fin", "km_parcourus", "vehicule_immat", "entretien", "facturation"], valeurs)
 
     # on récupère l'id contrat de la location qui vient d'être créée
-    query = "SELECT id_contrat FROM Location;"
+    query = "SELECT id_contrat FROM Location ORDER BY id_contrat;"
     curseur.execute(query)
     raw = curseur.fetchone()
     next_raw = curseur.fetchone()
@@ -127,7 +128,7 @@ def ajouter_location(curseur):
 
 ############### ANNULER LOCATION ###############
 
-def annuler_location(curseur):
+def annuler_location():
     c_location = input("\t Contrat de la location à supprimer : ")
     query = "DELETE FROM Location WHERE id_contrat='%s';" %c_location
     curseur.execute(query)
@@ -141,7 +142,7 @@ def annuler_location(curseur):
 
 ############### MODIFIER LOCATION ###############
 
-def modifier_location(curseur):
+def modifier_location():
     # pour l'instant seuls des attributs string peuvent être modifiés
     id_contrat = input("\tContrat de la location à modifier : ")
     nom_col = input("\tParamètre à modifier : ")
@@ -154,7 +155,7 @@ def modifier_location(curseur):
 ############### PAYER FACTURATION ###############
 
 
-def payer_facturation(curseur):
+def payer_facturation():
     # ce serait bien d'afficher le montant qui s'apprête à être réglé (plus tard)
     id_facturation = input("\t id de la facturation : ")
     moyen_payement = input("\t Moyen de payement : ")
@@ -177,7 +178,7 @@ def validation_finale_location():
 
 ########## CONTROLE PAR UN AGENT TECH = MAJ DE ENTRETIEN ##########
 
-def controler_apres_location(curseur):
+def controler_apres_location():
     id_entretien = input("\tId de l'entretien : ")
     date_ent = input("\tDate_entretien : ")
     date_ctrl = input("\tDate_controle : ")

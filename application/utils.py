@@ -14,11 +14,20 @@ curseur = conn.cursor()
 
 
 """
-    Retrouver toutes les lignes d'un table
+    Afficher table
 """
 
+def afficher(text, table):
+    header = [desc[0] for desc in curseur.description]
+    print(text)
+    for row in table:
+        print("======================================")
+        for i in range(len(row)):
+            print("\t", header[i], ":", row[i], sep=" ", end="\n")
 
-
+"""
+    Retrouver toutes les lignes d'un table
+"""
 def select_all(table):
     query = "SELECT * FROM %s" % table
     curseur.execute(query)
@@ -35,7 +44,3 @@ def insert(table, colonnes, valeurs):
         table, ",".join(colonnes), ",".join(["%s"] * len(colonnes)))
     curseur.execute(query, valeurs)
     conn.commit()
-
-def afficher_vehicules():
-    for row in select_all("Vehicule"):
-        print(row)
