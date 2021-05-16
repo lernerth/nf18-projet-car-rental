@@ -49,11 +49,11 @@ def argent_total(immat):
     print("voici l argent generee par la voiture:" a)
 
 def duree_moy_location(immat):
-    query = "SELECT AVG(date_fin-date_debut) FROM Location inner join Vehicule ON Location.vehicule_immat=Vehicule.immat where date_fin::date<current_date and Vehicule.immat='%s'" % immat 
+    query = "SELECT AVG(DATEDIFF(day, 'date_fin', 'date_deb')) FROM Location inner join Vehicule ON Location.vehicule_immat=Vehicule.immat where date_fin::date<current_date and Vehicule.immat='%s'" % immat 
     curseur.execute(query)
     raw1 = curseur.fetchone()
     raw = curseur.fetchone()
-    print("Voici la duree moyenne de location du véhicule")
+    print("Voici la duree moyenne de location du véhicule (en jours)")
     while raw:
         print (raw)
         raw = curseur.fetchone()
