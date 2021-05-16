@@ -39,14 +39,11 @@ def location_future(immat):
 
 
 def argent_total(immat):
-    query = "SELECT SUM(montant) FROM Facturation inner join LocationParticulier ON LocationParticulier.particulier=Facturation.clientParticulier inner join Location ON Location.id_contrat=LocationParticulier.id_contrat inner join Vehicule ON Location.vehicule_immat=Vehicule.immat WHERE date_fin::date<current_date and Vehicule.immat='%s'" % immat
+    query = "SELECT SUM(Facturation.montant) FROM Location inner join Facturation ON Location.facturation=Facturation.idFacturation inner join Vehicule on Location.vehicule_immat=Vehicule.immat WHERE etat_payement='TRUE' AND date_fin::date<current_date and Vehicule.immat='%s'" % immat
     curseur.execute(query)
     raw1 = curseur.fetchone()
-    query = "SELECT SUM(montant) FROM Facturation inner join LocationProfessionnel ON LocationProfessionnel.conducteur=Facturation.clientProfessionnel inner join Location ON Location.id_contrat=LocationProfessionnel.id_contrat inner join Vehicule on Location.vehicule_immat=Vehicule.immat WHERE etat_payement='TRUE' AND date_fin::date<current_date and Vehicule.immat='%s'" % immat
-    curseur.execute(query)
-    raw2 = curseur.fetchone()
-    a= raw1 + raw2
-    print("voici l argent generee par la voiture:", a)
+    while raw1:
+    print("voici l argent generee par la voiture:" raw1)
 
 def duree_moy_location(immat):
     query = "SELECT AVG(DATEDIFF(day, 'date_fin', 'date_deb')) FROM Location inner join Vehicule ON Location.vehicule_immat=Vehicule.immat where date_fin::date<current_date and Vehicule.immat='%s'" % immat 
