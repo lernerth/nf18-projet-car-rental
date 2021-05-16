@@ -79,29 +79,56 @@ VALUES
 
 INSERT INTO Conducteur(num_permis, nom, prenom, date_naissance, entreprise) 
 VALUES 
-	('182640721', 'Dubois', 'Paul', '19/10/1970', 1),
-	('203946253', 'Dupont', 'Etienne', '23/01/1986', 1),
-	('039527393', 'Sombrero', 'Antony', '06/05/1976', 2),
-	('103846389', 'Geigberg', 'David', '12/12/1992', 3),
-	('109372573', 'Oui-Oui', 'Medhi', '25/12/1994', 4);
+('182640721', 'Paul', 'Dubois', '19/10/1970', 1),
+('203946253', 'Etienne', 'Dupont', '23/01/1986', 1),
+('039527393', 'Antony', 'Sombrero', '06/05/1976', 2),
+('103846389', 'David', 'Geigberg', '12/12/1992', 3),
+('109372573', 'Medhi',  'Oui-Oui', '25/12/1994', 4);
 
+INSERT INTO Facturation(clientParticulier, clientProfessionnel, agent_com, montant, date_payement, moyen_reglement, etat_payement) 
+VALUES  
+-- facturations particulier
+(1, NULL, 3, 500, '12-09-2019', 'cheque', TRUE), -- Albert Pinot
+(3, NULL, 4, 900, NULL, NULL, FALSE), -- Charles Renard
+-- facturations professionnel
+(NULL, 2, 5, 1200, '02-01-2018', 'CB', TRUE), -- Zumbacafew
+(NULL, 3, 5, 1500, '01-02-2021', 'paypal', TRUE), -- Popelop
+(NULL, 5, 3, 1500, NULL, NULL, FALSE); -- Machine de A
 
--- ******* --
-INSERT INTO Location(date_debut ,date_fin,km_parcourus,vehicule_immat,entretien ,facturation ) VALUES 
-('05/08/2020', '12/12/2020',3000,'AA123AA', 1,1),
-('07/03/2020', '06/01/2021',400,'DD123DD', 2,2),
-('07/03/2020', '06/01/2021',4000,'HH123HH', 3,3),
-('08/04/2020', '10/06/2021',1200,'GG123GG',4,3);
+INSERT INTO Entretien(date_entretien, date_controle, resultat, societe, agent_tech)
+VALUES  
+('12-09-2019', '15-09-2019', 'Tres bon etat', '36252187900034', 1),
+('06/12/2021', NULL, NULL, '55252187900021', 2),
+('06/03/2018', '10/03/2018', 'Bon etat', '55252187900021', 2),
+('06/03/2018', '10/03/2018', 'Bon etat', '55252187900021', 2),
+('06/03/2018', '10/03/2018', 'Etat correct', '55252187900021', 2),
+('10/06/2021', NULL, NULL, '55252187900021', 2),
+('10/06/2022', NULL, NULL, '36252187900034', 1);
 
-INSERT INTO LocationProfessionnel
+INSERT INTO Location(date_debut, date_fin, km_parcourus, vehicule_immat, entretien, facturation) 
 VALUES 
-(3,'182640721'),
-(4,'039527393');
+-- locations particulier
+('05/08/2019', '12-09-2019', 3000, 'AA123AA', 1,1),
+('07/06/2021', '06/12/2021',400,'DD123DD', 2,2),
+-- locations professionnel
+('02-01-2018', '06/03/2018', 4000, 'HH123HH', 3, 3), -- Zumbacafew
+('02-01-2018', '06/03/2018', 4000, 'GG123GG', 4, 3), -- Zumbacafew
+('02-01-2018', '06/03/2018', 4000, 'GG123GG', 5, 3), -- Zumbacafew
+('01-02-2021', '10/06/2021', 300, 'GG123GG', 6, 4), -- Popelop
+('08/04/2022', '10/06/2022', 600, 'GG123GG', 7, 5); -- Machine de A
 
-INSERT INTO LocationParticulier(id_contrat, particulier ) 
+INSERT INTO LocationParticulier(id_contrat, particulier) 
 VALUES
 (1,1),
 (2,3);
+
+INSERT INTO LocationProfessionnel(id_contrat, conducteur)
+VALUES 
+(3,'182640721'),
+(4,'203946253'),
+(5,'039527393'),
+(6,'103846389'),
+(7,'109372573');
 
 INSERT INTO ValidationFinale(agent_com, location, date_validation, resultat_validation)
 VALUES  
@@ -109,14 +136,4 @@ VALUES
 (3, 2, '13-1-2021', TRUE),
 (4, 3, '14-1-2021', TRUE);
 
-INSERT INTO Entretien(identretien, date_entretien, date_controle, resultat, societe, agent_tech)
-VALUES  
-(1, '20-01-2021', '21-01-2021', 'abc', '36252187900034', 1),
-(2, '20-02-2021', '21-03-2021', 'xyz', '55252187900021', 2),
-(3, '20-03-2021', '21-05-2021', 'xyz', '36252187900034', 1);
 
--- INSERT INTO Facturation(idfacturation, clientParticulier, clientProfessionnel, agent_com, montant, date_payement, moyen_reglement, etat_payement) 
---VALUES  
---(1, NULL, '182640721', 1, 1200, '12-09-2020', 'CB', TRUE), 
---(2, NULL, '039527393', 2, 1500, '12-10-2020', 'CB', TRUE),
---(3, NULL, '039527393', 2, 1500, '12-10-2020', 'CB', TRUE);

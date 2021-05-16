@@ -10,6 +10,7 @@ CREATE TABLE Agence(
   CONSTRAINT check_siret CHECK(siret SIMILAR TO '[0-9]{14}')
 );
 
+
 CREATE TABLE Employe(
   id_employe SERIAL PRIMARY KEY,
   nom VARCHAR,
@@ -17,13 +18,16 @@ CREATE TABLE Employe(
   agence INTEGER REFERENCES Agence(id_agence)
 );
 
+
 CREATE TABLE AgentTechnique(
   id_employe INTEGER REFERENCES Employe(id_employe) PRIMARY KEY
 );
 
+
 CREATE TABLE AgentCommercial(
   id_employe INTEGER REFERENCES Employe(id_employe) PRIMARY KEY
 );
+
 
 CREATE TABLE SocieteEntretien(
   siret VARCHAR(14) PRIMARY KEY,
@@ -31,32 +35,39 @@ CREATE TABLE SocieteEntretien(
   CONSTRAINT check_siret CHECK(siret SIMILAR TO '[0-9]{14}')
 );
 
+
 CREATE TABLE AssocAgenceSocieteEntretien(
   id_agence INTEGER REFERENCES Agence(id_agence),
   siret VARCHAR(14) REFERENCES SocieteEntretien(siret),
   PRIMARY KEY(id_agence, siret)
 );
 
+CREATE TYPE Resultat_entretien AS ENUM('Tres bon etat', 'Bon etat', 'Etat correct', 'Mauvais etat');
+
 CREATE TABLE Entretien(
   id_entretien SERIAL PRIMARY KEY,
   date_entretien DATE,
   date_controle DATE,
-  resultat VARCHAR,
+  resultat Resultat_entretien,
   societe VARCHAR(14) REFERENCES SocieteEntretien(siret) NOT NULL,
   agent_tech INTEGER REFERENCES AgentTechnique(id_employe) NOT NULL
 );
+
 
 CREATE TABLE Option(
   nom VARCHAR PRIMARY KEY
 );
 
+
 CREATE TABLE TypeCarburant(
   nom VARCHAR PRIMARY KEY
 );
 
+
 CREATE TABLE Marque(
   nom VARCHAR PRIMARY KEY
 );
+
 
 CREATE TYPE NomCategorie AS ENUM('Citadine', 'Berline', 'berline petite', 'berline moyenne', 'berline grande', '4X4 SUV', 'Pickup', 'utilitaire');
 
@@ -65,12 +76,14 @@ CREATE TABLE CategorieVehicule(
   description VARCHAR
 );
 
+
 CREATE TABLE Modele(
   nom VARCHAR UNIQUE,
   marque VARCHAR REFERENCES Marque(nom),
   categorie NomCategorie REFERENCES CategorieVehicule(nom),
   PRIMARY KEY (nom, marque, categorie)
 );
+
 
 CREATE TABLE Vehicule(
   immat VARCHAR(7) UNIQUE,
@@ -88,17 +101,6 @@ CREATE TABLE Vehicule(
   CONSTRAINT check_immat CHECK(immat SIMILAR TO '[0-9A-Z]{7}')
 );
 
-CREATE TABLE Location(
-  id_contrat SERIAL PRIMARY KEY,
-  date_debut DATE NOT NULL,
-  date_fin DATE,
-  km_parcourus DECIMAL NOT NULL,
-  vehicule_immat VARCHAR(7) NOT NULL,
-  entretien INTEGER UNIQUE NOT NULL,
-  facturation INTEGER NOT NULL,
-  FOREIGN KEY(vehicule_immat) REFERENCES Vehicule(immat),
-  FOREIGN KEY(entretien) REFERENCES Entretien(id_entretien)
-);
 
 CREATE TABLE Particulier(
   id_client SERIAL PRIMARY KEY,
@@ -117,12 +119,6 @@ CREATE TABLE Particulier(
   CONSTRAINT num_bancaire CHECK(num_bancaire SIMILAR TO '[0-9]{16}')
 );
 
-CREATE TABLE LocationParticulier(
-  id_contrat INTEGER REFERENCES Location(id_contrat),
-  particulier INTEGER UNIQUE NOT NULL,
-  FOREIGN KEY(particulier) REFERENCES Particulier(id_client),
-  PRIMARY KEY(id_contrat)
-);
 
 CREATE TABLE Entreprise(
   id_client SERIAL PRIMARY KEY,
@@ -138,6 +134,7 @@ CREATE TABLE Entreprise(
   CONSTRAINT check_siret CHECK(siret SIMILAR TO '[0-9]{14}')
 );
 
+
 CREATE TABLE Conducteur(
   num_permis VARCHAR PRIMARY KEY,
   nom VARCHAR NOT NULL,
@@ -149,19 +146,13 @@ CREATE TABLE Conducteur(
   CONSTRAINT check_num_permis CHECK(num_permis SIMILAR TO '[0-9A-Z]{9}')
 );
 
-CREATE TABLE LocationProfessionnel(
-  id_contrat INTEGER REFERENCES Location(id_contrat),
-  conducteur VARCHAR(13) UNIQUE NOT NULL,
-  FOREIGN KEY(conducteur) REFERENCES Conducteur(num_permis),
-  PRIMARY KEY(id_contrat)
-);
 
 CREATE TYPE Reglement AS ENUM('CB', 'paypal', 'cash', 'cheque');
 
 CREATE TABLE Facturation(
   idFacturation SERIAL PRIMARY KEY,
-  clientParticulier INTEGER REFERENCES LocationParticulier(particulier),
-  clientProfessionnel VARCHAR(13) REFERENCES LocationProfessionnel(conducteur),
+  clientParticulier INTEGER REFERENCES Particulier(id_client),
+  clientProfessionnel INTEGER REFERENCES Entreprise(id_client),
   agent_com INTEGER NOT NULL,
   montant MONEY,
   date_payement DATE,
@@ -169,6 +160,37 @@ CREATE TABLE Facturation(
   etat_payement BOOLEAN NOT NULL,
   FOREIGN KEY(agent_com) REFERENCES AgentCommercial(id_employe)
 );
+
+
+CREATE TABLE Location(
+  id_contrat SERIAL PRIMARY KEY,
+  date_debut DATE NOT NULL,
+  date_fin DATE,
+  km_parcourus DECIMAL NOT NULL,
+  vehicule_immat VARCHAR(7) NOT NULL,
+  entretien INTEGER UNIQUE NOT NULL,
+  facturation INTEGER NOT NULL,
+  FOREIGN KEY(vehicule_immat) REFERENCES Vehicule(immat),
+  FOREIGN KEY(entretien) REFERENCES Entretien(id_entretien),
+  FOREIGN KEY(facturation) REFERENCES Facturation(idFacturation)
+);
+
+
+CREATE TABLE LocationParticulier(
+  id_contrat INTEGER REFERENCES Location(id_contrat) ON DELETE CASCADE,
+  particulier INTEGER UNIQUE, -- NOT NULL : QUESTIONNNN on enlève cette contrainte mais il faut vérifier qu'un conducteur n'est pas dans 2 loc qui ont lieu en mm temps
+  FOREIGN KEY(particulier) REFERENCES Particulier(id_client),
+  PRIMARY KEY(id_contrat)
+);
+
+
+CREATE TABLE LocationProfessionnel(
+  id_contrat INTEGER REFERENCES Location(id_contrat) ON DELETE CASCADE,
+  conducteur VARCHAR(13) UNIQUE, -- NOT NULL cf LocationParticulier QUESTIONNNNN
+  FOREIGN KEY(conducteur) REFERENCES Conducteur(num_permis),
+  PRIMARY KEY(id_contrat)
+);
+
 
 CREATE TABLE ValidationFinale(
   agent_com INTEGER REFERENCES AgentCommercial(id_employe),
@@ -178,4 +200,3 @@ CREATE TABLE ValidationFinale(
   PRIMARY KEY(agent_com, location)
 );
 
-ALTER TABLE Location ADD CONSTRAINT locFK FOREIGN KEY(facturation) REFERENCES Facturation(idFacturation);
