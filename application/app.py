@@ -3,7 +3,7 @@ from decimal import Decimal
 import bang
 import thomas
 import violette
-import Noe
+import noe
 
 
 """
@@ -48,7 +48,7 @@ menu_items = {
     "7": ["Valider une location", violette.validation_finale_location],
     "8": ["Controler un entretien", violette.controler_apres_location],
     "9": ["Bilan par client", thomas.bilan_client],
-    "10": ["Bilan par vehicule", Noe.bilan_vehicule],
+    "10": ["Bilan par vehicule", noe.bilan_vehicule],
     "11": ["Bilan par categorie", bang.bilan_par_categorie],
     "12": ["Trace des agents", bang.trace_agent],
     "0": ["Quitter le programme", quitter]
