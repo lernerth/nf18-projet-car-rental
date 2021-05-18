@@ -143,8 +143,9 @@ def annuler_location():
 ############### MODIFIER LOCATION ###############
 
 def modifier_location():
+    afficher("\nVoici la liste des locations actuelles", select_all("location"))
     # pour l'instant seuls des attributs string peuvent être modifiés
-    id_contrat = input("\tContrat de la location à modifier : ")
+    id_contrat = input("\tID Contrat de la location à modifier : ")
     nom_col = input("\tParamètre à modifier : ")
     nouvelle_valeur = input("\tNouvelle valeur : ")
     query = "UPDATE Location SET %s='%s' WHERE id_contrat='%s';" %(nom_col, nouvelle_valeur, id_contrat)
