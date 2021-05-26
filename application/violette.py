@@ -157,7 +157,7 @@ def modifier_location():
 
 
 def payer_facturation():
-    # ce serait bien d'afficher le montant qui s'apprête à être réglé (plus tard)
+    afficher("Liste des facturations pas encore payer", table)
     id_facturation = input("\t id de la facturation : ")
     moyen_payement = input("\t Moyen de payement : ")
     query = "UPDATE Facturation SET date_payement=current_date, moyen_reglement='%s', etat_payement=TRUE WHERE idFacturation='%s';" %(moyen_payement, id_facturation)
