@@ -74,8 +74,8 @@ def choisir_agent_com(nom, prenom):
     return input("Entrez id d'agent choisi : ")
 
 def choisir_agent(type_agent):
-    nom = input("Entrez le nom d'agent (laissez vide pour ne pas prendre en compte) ")
-    prenom = input("Entrez le prenom d'agent (laissez vide pour ne pas prendre en compte) ")
+    nom = input("Entrez le nom d'agent %s (laissez vide pour ne pas prendre en compte) " % type_agent)
+    prenom = input("Entrez le prenom d'agent %s (laissez vide pour ne pas prendre en compte) " % type_agent)
     type_agent_switcher = {
         "technique": choisir_agent_tech,
         "commercial": choisir_agent_com

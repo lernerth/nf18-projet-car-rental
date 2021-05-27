@@ -168,13 +168,16 @@ def payer_facturation():
 ########## VALIDATION FINALE PAR UN AGENT COM ##########
 
 def validation_finale_location():
+    agent_com = choisir_agent("commercial")
+    afficher("Liste des locations", select_all("location"))
+    location = input("\t ID contrat de la loc : ")
     valeurs = [
-        input("\t Agent Comm : "),
-        input("\t Contrat de la loc : "),
+        agent_com,
+        location,
         "today",
         input("\tResultat de la validation (1:ok / 0:not ok)")
     ]
-    insert("ValidationFinale", ["agent_com", "location", "date_validation", "resultat_validation"], valeurs) 
+    insert("ValidationFinale", ["agent_com", "location", "date_validation", "resultat_validation"], valeurs)
 
 
 ########## CONTROLE PAR UN AGENT TECH = MAJ DE ENTRETIEN ##########
