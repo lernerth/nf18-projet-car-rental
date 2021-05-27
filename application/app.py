@@ -38,6 +38,7 @@ def quitter():
 # Avec: x: numero de menu
 #       y: texte
 #       z: la fonction correspondante
+
 menu_items = {
     "1": ["Afficher liste des véhicules", bang.afficher_vehicules],
     "2": ["Ajouter une véhicule", bang.ajouter_vehicule],
@@ -54,6 +55,7 @@ menu_items = {
     "0": ["Quitter le programme", quitter]
 }
 
+## ajouter une fonction pour ajouter un client
 
 def main():
     while True:

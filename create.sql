@@ -178,7 +178,7 @@ CREATE TABLE Location(
 
 CREATE TABLE LocationParticulier(
   id_contrat INTEGER REFERENCES Location(id_contrat) ON DELETE CASCADE,
-  particulier INTEGER UNIQUE, -- NOT NULL : QUESTIONNNN on enlève cette contrainte mais il faut vérifier qu'un conducteur n'est pas dans 2 loc qui ont lieu en mm temps
+  particulier INTEGER UNIQUE, -- NOT NULL
   FOREIGN KEY(particulier) REFERENCES Particulier(id_client),
   PRIMARY KEY(id_contrat)
 );
@@ -186,7 +186,7 @@ CREATE TABLE LocationParticulier(
 
 CREATE TABLE LocationProfessionnel(
   id_contrat INTEGER REFERENCES Location(id_contrat) ON DELETE CASCADE,
-  conducteur VARCHAR(13) UNIQUE, -- NOT NULL cf LocationParticulier QUESTIONNNNN
+  conducteur VARCHAR(13) UNIQUE, -- NOT NULL
   FOREIGN KEY(conducteur) REFERENCES Conducteur(num_permis),
   PRIMARY KEY(id_contrat)
 );

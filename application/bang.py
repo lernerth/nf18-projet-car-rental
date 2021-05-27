@@ -6,7 +6,6 @@ def afficher_vehicules():
     afficher("Liste des vehicules", select_all("Vehicule"))
 
 
-
 def ajouter_vehicule():
     valeurs = [
         input("\tImmatriculation : "),
