@@ -183,6 +183,7 @@ def validation_finale_location():
 ########## CONTROLE PAR UN AGENT TECH = MAJ DE ENTRETIEN ##########
 
 def controler_apres_location():
+    afficher("Liste des entretien", select_all("entretien"))
     id_entretien = input("\tId de l'entretien : ")
     date_ent = input("\tDate_entretien : ")
     date_ctrl = input("\tDate_controle : ")
