@@ -59,7 +59,7 @@ def choisir_agent_tech(nom, prenom):
                 JOIN AgentTechnique ON Employe.id_employe = AgentTechnique.id_employe
                 WHERE LOWER(Employe.nom) LIKE %s
                    AND LOWER(Employe.prenom) LIKE %s;"""
-    curseur.execute(query, ("%" + nom + "%", "%" + prenom + "%"))
+    curseur.execute(query, ("%" + nom.lower() + "%", "%" + prenom.lower() + "%"))
     agents = curseur.fetchall()
     afficher("Voici la liste des agents correspondants", agents)
     return input("Entrez id d'agent choisi : ")
@@ -70,7 +70,7 @@ def choisir_agent_com(nom, prenom):
                 JOIN AgentCommercial ON Employe.id_employe = AgentCommercial.id_employe
                 WHERE LOWER(Employe.nom) LIKE %s
                    AND LOWER(Employe.prenom) LIKE %s;"""
-    curseur.execute(query, ("%" + nom + "%", "%" + prenom + "%"))
+    curseur.execute(query, ("%" + nom.lower() + "%", "%" + prenom.lower() + "%"))
     agents = curseur.fetchall()
     afficher("Voici la liste des agents correspondants", agents)
     return input("Entrez id d'agent choisi : ")
@@ -109,7 +109,7 @@ def choisir_client_prof():
     nom = input("Entrez le nom de l'entreprise (laissez vide pour ne pas prendre en compte) : ")
     query = """SELECT * FROM Entreprise
                 WHERE LOWER(Entreprise.nom) LIKE %s;"""
-    curseur.execute(query, ("%" + nom + "%",))
+    curseur.execute(query, ("%" + nom.lower() + "%",))
     clients = curseur.fetchall()
     afficher("\nVoici la liste des clients professionnels correspondants :", clients)
     return input("Entrez id du client choisi ou -1 si le client n'existe pas et que vous souhaitez l'ajouter : ")
@@ -122,7 +122,7 @@ def choisir_client_part():
     query = """SELECT * FROM Particulier
                 WHERE LOWER(Particulier.nom) LIKE %s
                     AND LOWER(Particulier.prenom) LIKE %s;"""
-    curseur.execute(query, ("%" + nom + "%", "%" + prenom + "%"))
+    curseur.execute(query, ("%" + nom.lower() + "%", "%" + prenom.lower() + "%"))
     clients = curseur.fetchall()
     afficher("\nVoici la liste des clients correspondants :", clients)
     return input("Entrez id du client choisi, ou -1 si le client n'existe pas et que vous souhaitez l'ajouter : ")
@@ -135,16 +135,17 @@ def choisir_client_part():
 
 def choisir_vehicule():
     modele = input("Modele du vehicule recherche (laisser vide pour voir toutes les possibilites) : ")
-    query = """SELECT v.immat, v.modele, v.carburant, v.couleur, v.nb_km, v.agence, v.agent_tech, l.date_fin, (DATEDIFF(CONVERT(CURDATE(), GETDATE(), 103), l.date_fin) >= 0 OR l.id_contrat IS NULL) AS Disponible 
-                FROM Vehicule v LEFT JOIN Location l
-                    ON v.immat = l.vehicule_immat 
-                        WHERE LOWER(Vehicule.modele) LIKE %s;"""
-    curseur.execute(query, ("%" + modele + "%",))
+    query = """SELECT v.immat, v.modele, l.* FROM Vehicule v
+                LEFT JOIN Location l
+                ON v.immat = l.vehicule_immat
+                WHERE (l.id_contrat is null OR current_date > l.date_fin)
+                    AND LOWER(v.modele) LIKE %s"""
+    curseur.execute(query, ("%" + modele.lower() + "%",))
     vehicules = curseur.fetchall()
     afficher("Voici la liste vehicules disponibles a la location correspondants", vehicules)
     return input("Entrez l'immatriculation du vehicule choisi : ")
 
-print("%s" %choisir_vehicule())
+print("%s" % choisir_vehicule())
 
 '''
     Choisir une société d'entretien
@@ -153,7 +154,7 @@ def choisir_societe():
     nom = input("Nom de la societe d'entretien recherchee (laisser vide pour voir toutes les societes enregistrees) : ")
     query = """SELECT * FROM SocieteEntretien
                     WHERE LOWER(SocieteEntretien.nom) LIKE %s;"""
-    curseur.execute(query, ("%" + nom + "%",))
+    curseur.execute(query, ("%" + nom.lower() + "%",))
     societes = curseur.fetchall()
     afficher("\nVoici la liste des societes d'entretien correspondants :", societes)
     return input("Entrer le numero de siret de la societe choisie : ")
