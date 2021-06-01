@@ -107,7 +107,7 @@ def ajouter_location():
     # VEHICULE
     print("*** Choix du véhicule ***\n")
     #afficher tous les véhicules disponibles à la location
-    immat = choisir_vehicule()
+    immat = choisir_vehicule_nouvelle_location()
 
     # on récupère son nombre de kilomètres:
     query = "SELECT nb_km FROM Vehicule WHERE immat='%s';" %immat
