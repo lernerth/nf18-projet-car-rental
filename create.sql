@@ -42,13 +42,13 @@ CREATE TABLE AssocAgenceSocieteEntretien(
   PRIMARY KEY(id_agence, siret)
 );
 
-CREATE TYPE Resultat_entretien AS ENUM('Tres bon etat', 'Bon etat', 'Etat correct', 'Mauvais etat');
+-- CREATE TYPE Resultat_entretien AS ENUM('Tres bon etat', 'Bon etat', 'Etat correct', 'Mauvais etat');
 
 CREATE TABLE Entretien(
   id_entretien SERIAL PRIMARY KEY,
   date_entretien DATE,
   date_controle DATE,
-  resultat Resultat_entretien,
+  resultat VARCHAR,
   societe VARCHAR(14) REFERENCES SocieteEntretien(siret) NOT NULL,
   agent_tech INTEGER REFERENCES AgentTechnique(id_employe) NOT NULL
 );
@@ -146,9 +146,6 @@ CREATE TABLE Conducteur(
   CONSTRAINT check_num_permis CHECK(num_permis SIMILAR TO '[0-9A-Z]{9}')
 );
 
-
-CREATE TYPE Reglement AS ENUM('CB', 'paypal', 'cash', 'cheque');
-
 CREATE TABLE Facturation(
   idFacturation SERIAL PRIMARY KEY,
   clientParticulier INTEGER REFERENCES Particulier(id_client),
@@ -156,7 +153,7 @@ CREATE TABLE Facturation(
   agent_com INTEGER NOT NULL,
   montant MONEY,
   date_payement DATE,
-  moyen_reglement Reglement,
+  moyen_reglement VARCHAR,
   etat_payement BOOLEAN NOT NULL,
   FOREIGN KEY(agent_com) REFERENCES AgentCommercial(id_employe)
 );
@@ -178,7 +175,7 @@ CREATE TABLE Location(
 
 CREATE TABLE LocationParticulier(
   id_contrat INTEGER REFERENCES Location(id_contrat) ON DELETE CASCADE,
-  particulier INTEGER UNIQUE, -- NOT NULL
+  particulier INTEGER NOT NULL,
   FOREIGN KEY(particulier) REFERENCES Particulier(id_client),
   PRIMARY KEY(id_contrat)
 );
@@ -186,7 +183,7 @@ CREATE TABLE LocationParticulier(
 
 CREATE TABLE LocationProfessionnel(
   id_contrat INTEGER REFERENCES Location(id_contrat) ON DELETE CASCADE,
-  conducteur VARCHAR(13) UNIQUE, -- NOT NULL
+  conducteur VARCHAR(13) NOT NULL,
   FOREIGN KEY(conducteur) REFERENCES Conducteur(num_permis),
   PRIMARY KEY(id_contrat)
 );

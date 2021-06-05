@@ -9,12 +9,12 @@ def afficher_vehicules():
 def ajouter_vehicule():
     valeurs = [
         input("\tImmatriculation : "),
-        input("\tModele : "),
-        input("\tType carburant : "),
+        choisir_modele(),
+        choisir_carburant(),
         input("\tCouleur : "),
         input("\tNb kilometres parcourus : "),
-        input("\tID agence ? "),
-        input("\tID d'agent technique : ")
+        choisir_agence(),
+        choisir_agent("technique")
     ]
     insert("Vehicule", ["immat", "modele", "carburant",
            "couleur", "nb_km", "agence", "agent_tech"], valeurs)

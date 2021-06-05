@@ -20,6 +20,5 @@ DROP TABLE LocationParticulier CASCADE;
 DROP TABLE Entreprise CASCADE;
 DROP TABLE Conducteur CASCADE;
 DROP TABLE LocationProfessionnel CASCADE;
-DROP TYPE Reglement CASCADE;
 DROP TABLE Facturation CASCADE;
 DROP TABLE ValidationFinale CASCADE;

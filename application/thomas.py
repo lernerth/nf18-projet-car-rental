@@ -13,11 +13,13 @@ global nb_loc_encours_pro
 def bilan_client():
     try :
         choix = int(input("""Quel type de client recherchez-vous ? 
-                                    1.Client Particulier 
-                                    2.Client Professionnel (entreprise)
+                                1.Client Professionnel (entreprise)
+                                2.Client Particulier 
                           """))
-        if choix == 1:
-            client = input("Entrer le numéro de client : ")
+        if choix == 2:
+            client = int(choisir_client_part())
+            if client == -1:
+                client = ajouter_client_part()
             sql = "SELECT * FROM Particulier WHERE id_client = %s"
             curseur.execute(sql, (client,))
             row = curseur.fetchone()
@@ -31,8 +33,10 @@ def bilan_client():
             print("Nombre de locations prévues : ", nb_loc_prevues)
             print("Total payé par le client : ", paye)
 
-        elif choix == 2 :
-            client = input("Entrer le numéro de client : ")
+        elif choix == 1:
+            client = int(choisir_client_prof())
+            if client == -1:
+                client = ajouter_client_prof()
             sql = "SELECT * FROM Entreprise WHERE id_client = %s"
             curseur.execute(sql, (client,))
             row = curseur.fetchone()
@@ -45,6 +49,7 @@ def bilan_client():
             print("Nombre de locations en cours : ", nb_loc_encours_pro)
             print("Nombre de locations prévues : ", nb_loc_prevues_pro)
             print("Total payé par le client : ", paye_pro)
+
 
     except ValueError:
         print("Choix incorrect, il faut entrer un entier de 1 à 4")
