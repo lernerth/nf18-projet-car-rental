@@ -45,7 +45,7 @@ menu_items = {
     "3": ["Ajouter une location", violette.ajouter_location],
     "4": ["Annuler une location", violette.annuler_location],
     "5": ["Modifier une location", violette.modifier_location],
-    "6": ["Annuler une location", violette.annuler_location],
+    "6": ["Valider une location", violette.validation_finale_location],
     "7": ["Payer une facturation", violette.payer_facturation],
     "8": ["Valider une location", violette.validation_finale_location],
     "9": ["Controler un entretien", violette.controler_apres_location],
