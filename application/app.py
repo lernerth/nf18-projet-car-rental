@@ -19,7 +19,7 @@ def menu(menu_items):
     if choix in menu_items:
         return menu_items[choix][-1]
     else:
-        return None
+        return menu(menu_items)
 
 
 
