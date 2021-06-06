@@ -191,7 +191,7 @@ CREATE TABLE LocationProfessionnel(
 
 CREATE TABLE ValidationFinale(
   agent_com INTEGER REFERENCES AgentCommercial(id_employe),
-  location INTEGER REFERENCES Location(id_contrat),
+  location INTEGER REFERENCES Location(id_contrat) ON DELETE CASCADE,
   date_validation DATE,
   resultat_validation BOOLEAN NOT NULL,
   PRIMARY KEY(agent_com, location)

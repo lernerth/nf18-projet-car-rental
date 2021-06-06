@@ -4,10 +4,13 @@ from utils import *
 
 #### entretien ####
 
-def ajouter_entretien():
+def ajouter_entretien(immat):
+    query = """SELECT v.agent_tech FROM Vehicule v WHERE v.immat = '%s'""" %immat
+    curseur.execute(query)
+    ag = curseur.fetchone()
     valeurs = [
         choisir_societe(),
-        choisir_agent("technique"),
+        ag,
      ]
     insert("Entretien", ["societe", "agent_tech"], valeurs) # voir plus tard pour ajouter date etc.
 
@@ -105,7 +108,7 @@ def ajouter_location():
 
     # ENTRETIEN
     print("*** Entretien ***\n")
-    id_entretien = ajouter_entretien()
+    id_entretien = ajouter_entretien(immat)
     print("\n")
 
     # FACTURATION
@@ -188,7 +191,11 @@ def validation_finale_location():
 ########## CONTROLE PAR UN AGENT TECH = MAJ DE ENTRETIEN ##########
 
 def controler_apres_location():
-    afficher("Liste des entretiens", select_all("entretien"))
+    agent = int(choisir_agent("technique"))
+    query = """SELECT * FROM Entretien e WHERE e.agent_tech = %d""" %agent
+    curseur.execute(query)
+    listeEnt = curseur.fetchall()
+    afficher("Liste des entretiens", listeEnt)
     id_entretien = input("Id de l'entretien : ")
     date_ent = input("Date_entretien (YYYY-MM-DD) : ")
     date_ctrl = input("Date_controle (YYYY-MM-DD) : ")

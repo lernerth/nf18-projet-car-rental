@@ -8,11 +8,11 @@ def afficher_vehicules():
 
 def ajouter_vehicule():
     valeurs = [
-        input("\tImmatriculation : "),
+        input("Immatriculation : "),
         choisir_modele(),
         choisir_carburant(),
-        input("\tCouleur : "),
-        input("\tNb kilometres parcourus : "),
+        input("Couleur : "),
+        input("Nb kilometres parcourus : "),
         choisir_agence(),
         choisir_agent("technique")
     ]
