@@ -23,10 +23,6 @@ def afficher(text, table):
     header = [desc[0] for desc in curseur.description]
     print(text + "\n")
     print(tabulate(table, headers=header), end="\n\n")
-    # for row in table:
-    #     print("======================================")
-    #     for i in range(len(row)):
-    #         print("\t", header[i], ":", row[i], sep=" ", end="\n")
 
 
 """
@@ -88,7 +84,6 @@ def choisir_agent(type_agent):
     }
     return type_agent_switcher.get(type_agent)(nom, prenom)
 
-# print("%s" %choisir_agent("technique"))
 
 '''
     Récupérer un élément de la dernière insertion dans une table
@@ -117,7 +112,6 @@ def choisir_client_prof():
     afficher("Voici la liste des clients professionnels correspondants :", clients)
     return input("Entrez id du client choisi ou -1 si le client n'existe pas et que vous souhaitez l'ajouter : ")
 
-#print("%s" %choisir_client_prof())
 
 def choisir_client_part():
     nom = input("Entrez le nom du client (laissez vide pour ne pas prendre en compte) : ")
@@ -130,7 +124,6 @@ def choisir_client_part():
     afficher("Voici la liste des clients correspondants :", clients)
     return input("Entrez id du client choisi, ou -1 si le client n'existe pas et que vous souhaitez l'ajouter : ")
 
-#print("%s" %choisir_client_part())
 
 '''
     Choisir un véhicule
@@ -162,7 +155,6 @@ def choisir_vehicule_nouvelle_location(date_deb_location, date_fin_location):
             fin += 1
         # 2018-06-15
         # 2018-07-10
-        # print("Immat:", vehicules[debut][0], debut, fin, sep=" ", end="\n")
 
         if fin - debut + 1 == 1: # Une seule location en cours
             if (vehicules[debut][2] is None) or (date_fin_location < vehicules[debut][2]) or (vehicules[debut][3] < date_deb_location):
@@ -194,7 +186,6 @@ def choisir_vehicule_nouvelle_location(date_deb_location, date_fin_location):
 
     return input("Entrez l'immatriculation du vehicule choisi : ")
 
-# print("%s" % choisir_vehicule_nouvelle_location())
 
 '''
     Choisir une société d'entretien
@@ -208,7 +199,6 @@ def choisir_societe():
     afficher("Voici la liste des societes d'entretien correspondants :", societes)
     return str(input("Entrer le numero de siret de la societe choisie : "))
 
-#print("%s" %choisir_societe())
 
 '''
     Choisir un conducteur
@@ -237,8 +227,6 @@ def choisir_conducteur(idClient):
         choixCond = ajouter_conducteur(idClient)
     return choixCond
 
-#print("%s" %choisir_conducteur(1))
-
 def choisir_modele():
     query = """SELECT nom FROM Modele"""
     curseur.execute(query)
@@ -247,7 +235,6 @@ def choisir_modele():
     choixMod = input("Choix du modele (attention a l'orthographe!) : ")
     return choixMod
 
-#print(choisir_modele())
 
 def choisir_agence():
     query = """SELECT * FROM Agence"""
@@ -279,7 +266,6 @@ def choisir_factu_impayee():
     choixF = input("Id de la facturation a regler : ")
     return choixF
 
-#print("%s" %choisir_factu_impayee())
 
 
 ### ajouter un nouveau client ###
@@ -295,7 +281,6 @@ def ajouter_client_prof():
     insert("Entreprise", ["nom","mail","tel","siret","num_bancaire"], valeurs)
     return recupDernierAjout("id_client", "Entreprise")
 
-#print(ajouter_client_prof())
 
 def ajouter_client_part():
     valeurs = [
@@ -311,7 +296,6 @@ def ajouter_client_part():
     insert("Particulier", ["nom", "prenom", "mail", "telephone", "adresse", "num_permis", "date_naissance", "num_bancaire"], valeurs)
     return recupDernierAjout("id_client", "Particulier")
 
-#print(ajouter_client_part())
 
 def choisir_location_a_valider():
     query = """SELECT * FROM Location l LEFT JOIN ValidationFinale v ON l.id_contrat = v.location
@@ -323,7 +307,6 @@ def choisir_location_a_valider():
     choix = input("ID contrat de la loc : ")
     return choix
 
-#choisir_location_a_valider()
 
 def choisir_facturation_entreprise(idClientPro):
     query = """SELECT f.idFacturation, f.montant FROM Facturation f JOIN Entreprise e 
