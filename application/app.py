@@ -47,11 +47,11 @@ menu_items = {
     "5": ["Modifier une location", violette.modifier_location],
     "6": ["Valider une location", violette.validation_finale_location],
     "7": ["Payer une facturation", violette.payer_facturation],
-    "9": ["Controler un entretien", violette.controler_apres_location],
-    "10": ["Bilan par client", thomas.bilan_client],
-    "11": ["Bilan par vehicule", noe.bilan_vehicule],
-    "12": ["Bilan par categorie", bang.bilan_par_categorie],
-    "13": ["Trace des agents", bang.trace_agent],
+    "8": ["Controler un entretien", violette.controler_apres_location],
+    "9": ["Bilan par client", thomas.bilan_client],
+    "10": ["Bilan par vehicule", noe.bilan_vehicule],
+    "11": ["Bilan par categorie", bang.bilan_par_categorie],
+    "12": ["Trace des agents", bang.trace_agent],
     "0": ["Quitter le programme", quitter]
 }
 
