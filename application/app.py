@@ -47,7 +47,6 @@ menu_items = {
     "5": ["Modifier une location", violette.modifier_location],
     "6": ["Valider une location", violette.validation_finale_location],
     "7": ["Payer une facturation", violette.payer_facturation],
-    "8": ["Valider une location", violette.validation_finale_location],
     "9": ["Controler un entretien", violette.controler_apres_location],
     "10": ["Bilan par client", thomas.bilan_client],
     "11": ["Bilan par vehicule", noe.bilan_vehicule],
