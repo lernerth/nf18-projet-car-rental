@@ -6,6 +6,7 @@ DROP TABLE AgentTechnique CASCADE;
 DROP TABLE AgentCommercial CASCADE;
 DROP TABLE SocieteEntretien CASCADE;
 DROP TABLE AssocAgenceSocieteEntretien CASCADE;
+DROP TYPE Resultat_entretien CASCADE;
 DROP TABLE Entretien CASCADE;
 DROP TABLE Option CASCADE;
 DROP TABLE TypeCarburant CASCADE;
