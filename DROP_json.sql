@@ -15,3 +15,4 @@ DROP TABLE Entreprise CASCADE;
 DROP TABLE Conducteur CASCADE;
 DROP TABLE LocationProfessionnel CASCADE;
 DROP TABLE Facturation CASCADE;
+

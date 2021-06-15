@@ -4,7 +4,7 @@ import bang
 import thomas
 import violette
 import noe
-
+import fonctions_json
 
 """
     Afficher un menu
@@ -52,6 +52,7 @@ menu_items = {
     "10": ["Bilan par vehicule", noe.bilan_vehicule],
     "11": ["Bilan par categorie", bang.bilan_par_categorie],
     "12": ["Trace des agents", bang.trace_agent],
+    "13": ["Afficher les options de tous les vehicules", fonctions_json.option_vehicule],
     "0": ["Quitter le programme", quitter]
 }
 

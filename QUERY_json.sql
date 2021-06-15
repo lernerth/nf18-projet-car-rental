@@ -16,10 +16,6 @@ SELECT v.immat, CAST(v.modele->'marque'->>'nom' AS VARCHAR) AS marque
 FROM Vehicule v;
 
 
-
 -- trouver la validation finale d'un vehicule
-SELECT L.id_contrat, CAST(L.validationFinale->>'resultat' AS VARCHAR) AS resultat, CAST(L.validationFinale->>'date' AS DATE) AS date
-FROM Location L;
--- trouver la validation finale d'un vehicule
-SELECT L.id_contrat, CAST(L.validationFinale->>'resultat' AS VARCHAR) AS resultat, CAST(L.validationFinale->>'date' AS DATE) AS date, E.nom, E.prenom
-FROM Location L join Employe E on L.agent_com=E.idemploye;
+SELECT L.id_contrat, CAST(L.validation_finale->>'resultat' AS VARCHAR) AS resultat, CAST(L.validation_finale->>'date' AS DATE) AS date, E.nom, E.prenom
+FROM Location L join Employe E on L.agent_com=E.id_employe;

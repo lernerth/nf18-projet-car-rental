@@ -92,7 +92,7 @@ VALUES (
 	1,
 	1,
 	3,
-	'{"date":"2021-06-15", "resultat":TRUE}'
+	'{"date":"2021-06-15", "resultat":"TRUE"}'
 );
 INSERT INTO LocationParticulier(id_contrat, particulier) 
 VALUES
