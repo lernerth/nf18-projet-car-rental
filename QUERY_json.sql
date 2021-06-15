@@ -10,3 +10,7 @@ FROM Vehicule v;
 -- trouver le modele d un véhicule
 SELECT v.immat, CAST(v.modele->>'nom' AS VARCHAR) AS modele, CAST(v.modele->>'nb_portes' AS INTEGER) AS nbre_portes
 FROM Vehicule v;
+
+--trouver la marque d'un véhicule
+SELECT v.immat, CAST(v.modele->'marque'->>'nom' AS VARCHAR) AS marque
+FROM Vehicule v;
