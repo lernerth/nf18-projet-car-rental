@@ -14,3 +14,7 @@ FROM Vehicule v;
 --trouver la marque d'un véhicule
 SELECT v.immat, CAST(v.modele->'marque'->>'nom' AS VARCHAR) AS marque
 FROM Vehicule v;
+
+-- trouver la validation finale d'un vehicule
+SELECT L.id_contrat, CAST(L.validationFinale->>'resultat' AS VARCHAR) AS resultat, CAST(L.validationFinale->>'date' AS DATE) AS date
+FROM Location L;
